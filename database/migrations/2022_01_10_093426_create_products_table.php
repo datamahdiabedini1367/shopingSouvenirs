@@ -25,6 +25,13 @@ class CreateProductsTable extends Migration
             $table->double('discount')->default(0);
             $table->string('city')->nullable();
             $table->timestamps();
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade')// <===>  ->cascadeOnDelete() //
+                                          //->nullOnDelete() <===> //->onDelete('set null')
+                ->onUpdate('cascade');// <===> ->cascadeOnUpdate();
         });
     }
 

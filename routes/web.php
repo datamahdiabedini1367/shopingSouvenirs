@@ -100,5 +100,5 @@ Route::get('test',function (){
 
 
 Route::resources([
-    'product' => ProductController::class,
+    'products' => ProductController::class,
 ]);
