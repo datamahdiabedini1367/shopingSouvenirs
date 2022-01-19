@@ -10,6 +10,7 @@ use App\Support\Cost\ShipingCost;
 use App\Support\Discount\DiscountManager;
 use App\Support\SessionStorage;
 use App\Support\Storage\Contracts\StorageInterface;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         $this->app->bind(StorageInterface::class, function ($app) {
             return new SessionStorage('cart');
         });
