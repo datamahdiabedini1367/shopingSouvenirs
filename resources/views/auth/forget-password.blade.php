@@ -1,34 +1,69 @@
-@extends('layouts.app')
+@extends('client.layouts.app')
 
 @section('title' , __('auth.forgot password'))
 
 
 @section('content')
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        @include('partials.alerts')
-        <div class="card">
-            <div class="card-header">
-                @lang('auth.forgot password')
-            </div>
-            <div class="card-body">
-            <form method="POST" action="{{route('auth.password.forget')}}">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label" for="email">@lang('auth.email')</label>
-                        <div class="col-sm-9">
-                            <input type="email" name="email" class="form-control" id="email" value="{{old('email')}}"
-                                aria-describedby="emailHelp" placeholder="@lang('auth.enter your email')">
+
+
+<section class="inner-page" id="contact-page">
+            <div class="container-fluid" id="page-hero">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 px-0">
+                                    <h1>بازیابی رمز عبور</h1>
+                                    <p>رمز عبور خود را بازیابی کنید.</p>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item active" aria-current="page">بازیابی رمز عبور</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-9 offset-sm-3">
-                        @include('partials.validation-errors')
+                </div>
+            </div>
+
+            <div class="container py-2 py-md-5">
+                <div class="row">
+                    @include('partials.alerts')
+                    <div class="col-12 col-sm-10 offset-sm-1">
+                        <div class="content">
+                            <form method="POST" action="{{route('auth.password.forget')}}">
+                                @csrf
+                                <div class="row">
+
+
+                                    <div class="col-12 col-lg-5 text-center">
+                                        <img src="{{asset('client/assets/images/reset-password.png')}}" alt="">
+                                    </div>
+                                    <div class="col-12 col-lg-7 pt-5 pt-md-0 align-self-center">
+                                        <div class="title">بازیابی رمز</div>
+                                        <p>برای بازیابی رمز عبور، پست الکترونیک خود را وارد کنید.</p>
+                                        <div class="form-group">
+                                            <label for="email">@lang('auth.email')</label>
+                                            <input type="email" class="form-control" id="email"
+                                                   value="{{old('email')}}" name="email"
+                                                   placeholder="@lang('auth.enter your email')"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="ارسال لینک بازیابی رمز عبور" class="btn btn-success">
+                                        </div>
+                                        @include('partials.validation-errors')
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">@lang('auth.request reset password')</button>
-            </form>
-        </div>
-    </div>
-</div>
+                </div>
+            </div>
+        </section>
 
 @endsection

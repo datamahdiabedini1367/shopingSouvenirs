@@ -1,4 +1,5 @@
 @inject('basket' , 'App\Support\Basket\Basket')
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <a class="navbar-brand" href="#">
         <img src="{{asset('img/logo.png')}}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -19,22 +20,6 @@
             <a class="btn btn-info  mr-2" href="{{route('auth.login.form')}}">ورود</a>
             <a class="btn btn-info mr-2" href="{{route('auth.register.form')}}">ثبت نام</a>
         @endguest
-        @auth
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {{Auth::user()->firstname }}
-                    </a>
-                    <div class="dropdown-menu logout-btn" aria-labelledby="navbarDropdown">
 
-                        <a  class="dropdown-item" href="{{route('auth.logout')}}">خروج</a>
-                    </div>
-                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        @endauth
     </div>
 </nav>

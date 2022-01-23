@@ -1,109 +1,82 @@
-@extends('admin.layout.master')
+@extends('admin.layouts.app')
 
+@section('title' ,'لیست محصولات')
+
+@section('links')
+@endsection
 
 @section('content')
 
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="page-title">محصولات</h3>
+            <div class="d-inline-block align-items-center">
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+                        <li class="breadcrumb-item" aria-current="page">فروشگاه</li>
+                        <li class="breadcrumb-item active" aria-current="page">محصولات</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="right-title bg-white rounded-circle">
+            <a href="{{route('admin.products.create')}}" class="btn no-caret"> <i class="mdi mdi-plus"></i></a>
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+    @include("partials.alerts")
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="box">
-                <div class="box-header with-border">
-                    <h1 class="box-title">
-                        محصولات
-                    </h1>
-                </div>
                 <div class="box-body">
                     <div class="table-responsive">
-                        <table id="example5" class="table table-bordered table-striped" style="width:100%">
+                        <table id="products" class="table table-hover no-wrap product-order" data-page-size="10">
                             <thead>
                             <tr>
-
-                                <th>#</th>
+                                <th>دسته بندی</th>
                                 <th>نام محصول</th>
                                 <th>قیمت</th>
-                                <th>برند</th>
-                                <th>دسته بندی</th>
-                                <th>تاریخ ایجاد</th>
-                                <th>تصویر</th>
-                                <th>گالری تصاویر</th>
+                                <th>موجودی در انبار</th>
                                 <th>تخفیف</th>
-                                <th>ویرایش</th>
-                                <th>حذف</th>
+                                <th>تاریخ ثبت</th>
+                                <th>عکس</th>
+                                <th>اقدامات</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $product)
-                                @php
-                                    @endphp
                                 <tr>
-                                    <td>{{$product->id}}</td>
+                                    <td>{{$product->category_name}}</td>
+                                    {{--                                                'name', 'description', 'price', 'stock'--}}
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->cost}}</td>
-                                    <td>{{$product->brand->name}}</td>
-                                    <td>{{$product->category->title}}</td>
-                                    <td>{{$product->created_at}}</td>
+                                    <th>{{number_format($product->price)}}</th>
+                                    <th>{{$product->stock}}</th>
+                                    <th>{{$product->validCoupon}}</th>
+                                    <th>{{$product->created_at}}</th>
+                                    <td><img src="{{asset('admin/images/product/product-1.png')}}" alt="product" width="80"></td>
                                     <td>
-                                        <img src="{{str_replace('public','/storage',$product->image)}}"
-                                             style="min-width: 50px;max-width: 50px;min-height: 50px;max-height: 50px;"
-                                        />
-                                    </td>
-                                    <td>
-
-                                        <a href="{{route('products.pictures.index',[$product])}}"
-                                           class="btn btn-sm btn-warning">
-                                            گالری
+                                        <a href="{{route('admin.products.update' ,['product'=>$product])}}" class="text-info mr-10" data-toggle="tooltip"
+                                           data-original-title="ویرایش">
+                                            <i class="ti-marker-alt"></i>
                                         </a>
-                                    </td>
-                                    <td>
-
-                                        @if(!$product->hasDiscount() )
-                                            <a class="btn btn-sm btn-app"
-                                               href="{{route('products.discounts.create',$product)}}">
-                                                <span
-                                                    class="badge bg-teal"> @if($product->hasDiscount())    {{$product->discount->value}} @else
-                                                        0 @endif </span>
-                                                <i class="fa fa-inbox"></i> ایجاد تخفیف
-                                            </a>
-                                        @else
-                                            <p>{{$product->discount->value}}</p>
-                                            <form action="{{route('products.discounts.destroy',['product'=>$product,'discount' => $product->discount])}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <input type="submit" value="حذف" class="btn btn-sm btn-danger">
-
-                                            </form>
-                                        @endif
-
-                                        {{--                                        <a href="{{route('products.pictures.index',[$product])}}"--}}
-                                        {{--                                           class="btn btn-sm btn-warning">--}}
-                                        {{--                                            --}}
-                                        {{--                                        </a>--}}
-                                    </td>
-                                    <td>
-                                        <a href="{{route('products.edit', $product)}}"
-                                           class="btn btn-sm btn-primary">ویرایش</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{route('products.destroy', $product)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" class="btn btn-sm btn-danger" value="حذف">
-                                        </form>
+                                        <a href="{{route('admin.products.destroy' ,['product'=>$product])}}" class="text-danger" data-original-title="حذف"
+                                           data-toggle="tooltip">
+                                            <i class="ti-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
 
+
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>نام محصول</th>
-                                <th>قیمت</th>
-                                <th>برند</th>
-                                <th>دسته بندی</th>
-                                <th>تاریخ ایجاد</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -111,14 +84,16 @@
         </div>
     </div>
 
+</section>
+<!-- /.content -->
+
 @endsection
+
+
+
 
 
 @section('scripts')
-    <script src="/admin/assets/vendor_components/datatable/datatables.min.js"></script>
-
-    <!-- Superieur Admin for Data Table -->
-    <script src="/admin/js/pages/data-table.js"></script>
-
-
+    <script src="{{asset('admin/js/pages/data-table.js')}}"></script>
 @endsection
+

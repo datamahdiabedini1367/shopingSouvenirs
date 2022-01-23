@@ -85,34 +85,11 @@ class Product extends Model
 
     }
 
+    public function getCategoryNameAttribute()
+    {
+        return $this->category->name ?? '';
+    }
 
 
-//    public function getPriceWithDiscountAttribute($price)
-//    {
-//        $coupons = $this->category->validCoupons();
-//        if ($coupons->isNotEmpty()){
-//            $discountCalculator= resolve(DiscountCalculator::class);
-//            return $discountCalculator->discountedPrice($coupons->last() , $price);
-//        }
-//        return  $price;
 
-//        $coupons = $this->validCoupons;
-//        dd('getPriceAttribute:' ,$coupons , $coupons->isNotEmpty());
-//        if ($coupons->isNotEmpty()){
-//            $discountCalculator= resolve(DiscountCalculator::class);
-//                    dd(
-//                        'getPriceAttribute:',
-//                        $coupons ,
-//                        $coupons->isNotEmpty(),
-//                        $coupons->last(),
-//                        $this->price ,
-//                        $discountCalculator->discountedPrice($coupons->last() ,$this->price)
-//                    );
-
-
-//            return $discountCalculator->discountedPrice($coupons->last() , $this->price);
-//        }
-//        return  $price;
-//
-//    }
 }

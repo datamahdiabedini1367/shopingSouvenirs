@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ProductController;
+//use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialController;
@@ -33,6 +35,14 @@ use Illuminate\Support\Facades\URL;
 //    return view('welcome');
 //})->name('home');
 
+Route::get("/adminpanel",function (){
+    return view('admin.layouts.app');
+});
+
+Route::get("/adminpanel/products/list",function (){
+    return view('admin.products.list');
+});
+
 Route::get('/', [ProductController::class,'index'])->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -52,6 +62,7 @@ Route::group(['prefix'=>'auth','namespace'=>'Auth'],function(){
 
     Route::get('register',[RegisterController::class,'showRegistrationForm'])->name('auth.register.form');
     Route::post('register',[RegisterController::class,'register'])->name('auth.register');
+
     Route::get('login',[LoginController::class,'showLoginForm'])->name('auth.login.form');
     Route::post('login',[LoginController::class,'login'])->name('auth.login');
 
@@ -63,17 +74,12 @@ Route::group(['prefix'=>'auth','namespace'=>'Auth'],function(){
     Route::get('password/forget',[ForgotPasswordController::class,'showForgetForm'])->name('auth.password.forget.form');
     Route::post('password/forget',[ForgotPasswordController::class,'sendResetLink'])->name('auth.password.forget');
 
-
-
     Route::get('password/reset',[ResetPasswordController::class,'showResetForm'])->name('auth.password.reset.form');
     Route::post('password/reset',[ResetPasswordController::class,'reset'])->name('auth.password.reset');
 
-
     Route::get('redirect/{provider}',[SocialController::class,'redirectToProvider'])->name('auth.login.provider.redirect');
 
-
     Route::get('{provider}/callback',[SocialController::class,'callbackProvider'])->name('auth.login.provider.callback');
-
 
     Route::get('magic/login',[MagicController::class,'ShowMagicForm'])->name('auth.magic.login.form');
     Route::post('magic/login',[MagicController::class,'sendToken'])->name('auth.magic.send.token');
@@ -97,8 +103,30 @@ Route::get('test',function (){
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//--------------------admin panel-----------------
+
+Route::prefix('/')->name('client.')->group(function(){
+    Route::resources([
+        'products' => \App\Http\Controllers\Client\ProductController::class,
+    ]);
+
+});
+
+Route::prefix('/adminpanel')->name('admin.')->group(function(){
+    Route::resources([
+        'products' => ProductController::class,
+        'categories' => CategoryController::class
+    ]);
+
+    Route::get('category/subCategory/{category:slug}/create',[CategoryController::class,'create_sub_category'])->name('category.subCategory.create');
+//    Route::post('category/subCategory/{category:slug}',[CategoryController::class,'store_sub_category'])->name('category.subCategory.create');
+
+});
 
 
-Route::resources([
-    'products' => ProductController::class,
-]);
+
+//Route::resources([
+//    'products' => ProductController::class,
+//]);
+
+

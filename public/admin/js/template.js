@@ -1,9 +1,9 @@
 //[Master Javascript]
 
-//Project:	Superieur Admin - Responsive Admin Template
-//Primary use:	Superieur Admin - Responsive Admin Template
+//Project:	crmx Admin - Responsive Admin Template
+//Primary use:	crmx Admin - Responsive Admin Template
 
-//should be included in all pages. It controls some layout
+//should be included in all pages. It controls some layouts
 
 
 // Make sure jQuery has been loaded
@@ -13,8 +13,8 @@ throw new Error('template requires jQuery')
 
 // Layout()
 
-//  Implements layout.
-//  Fixes the layout height in case min-height fails.
+//  Implements layouts.
+//  Fixes the layouts height in case min-height fails.
 
 //  @usage activated automatically upon window load.
 //  Configure any options by passing data-option="value"
@@ -25,7 +25,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.layout'
+  var DataKey = 'crmxadmin.layouts'
 
   var Default = {
     slimscroll : true,
@@ -35,7 +35,7 @@ throw new Error('template requires jQuery')
   var Selector = {
     wrapper       : '.wrapper',
     contentWrapper: '.content-wrapper',
-    layoutBoxed   : '.layout-boxed',
+    layoutBoxed   : '.layouts-boxed',
     mainFooter    : '.main-footer',
     mainHeader    : '.main-header',
     sidebar       : '.sidebar',
@@ -95,7 +95,7 @@ throw new Error('template requires jQuery')
   }
 
   Layout.prototype.fix = function () {
-    // Remove overflow from .wrapper if layout-boxed exists
+    // Remove overflow from .wrapper if layouts-boxed exists
     $(Selector.layoutBoxed + ' > ' + Selector.wrapper).css('overflow', 'hidden')
 
     // Get window height and the wrapper height
@@ -137,7 +137,7 @@ throw new Error('template requires jQuery')
       return
     }
 
-    // Enable slimscroll for fixed layout
+    // Enable slimscroll for fixed layouts
     if (this.options.slimscroll) {
       if (typeof $.fn.slimScroll !== 'undefined') {
         // Destroy if it exists
@@ -200,7 +200,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.pushmenu'
+  var DataKey = 'crmxadmin.pushmenu'
 
   var Default = {
     collapseScreenSize   : 767,
@@ -374,7 +374,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.tree'
+  var DataKey = 'crmxadmin.tree'
 
   var Default = {
     animationSpeed: 500,
@@ -515,7 +515,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.controlsidebar'
+  var DataKey = 'crmxadmin.controlsidebar'
 
   var Default = {
     slide: true
@@ -528,7 +528,7 @@ throw new Error('template requires jQuery')
     bg     : '.control-sidebar-bg',
     wrapper: '.wrapper',
     content: '.content-wrapper',
-    boxed  : '.layout-boxed'
+    boxed  : '.layouts-boxed'
   }
 
   var ClassName = {
@@ -650,7 +650,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.boxwidget'
+  var DataKey = 'crmxadmin.boxwidget'
 
   var Default = {
     animationSpeed : 500,
@@ -810,7 +810,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.todolist'
+  var DataKey = 'crmxadmin.todolist'
 
   var Default = {
     iCheck   : false,
@@ -913,7 +913,7 @@ throw new Error('template requires jQuery')
 +function ($) {
   'use strict'
 
-  var DataKey = 'fabadmin.directchat'
+  var DataKey = 'crmxadmin.directchat'
 
   var Selector = {
     data: '[data-widget="chat-pane-toggle"]',
@@ -963,9 +963,9 @@ throw new Error('template requires jQuery')
     if (event) event.preventDefault()
     Plugin.call($(this), 'toggle')
   })
-  
+
   // Slim scrolling
-  
+
   $('.inner-content-div').slimScroll({
     height: '200'
   });
@@ -973,18 +973,18 @@ throw new Error('template requires jQuery')
   $('.sm-scrol').slimScroll({
     height: '250'
   });
-	
+
   $('.direct-chat-messages').slimScroll({
     height: '310'
   });
 
-  
+
   $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {
         $(".app-search").toggle(200);
     });
-	
-	
-	
+
+
+
   // Close
     //
     $(document).on('click', '.box-btn-close', function() {
@@ -1021,22 +1021,22 @@ throw new Error('template requires jQuery')
     $(document).on('click', '.box-btn-fullscreen', function(){
       $(this).parents('.box').toggleClass('box-fullscreen').removeClass('box-maximize');
     });
-	
-		
+
+
 		// Disable demonstrative links!
     //
     $(document).on('click', 'a[href="#"]', function(e){
       e.preventDefault();
     });
-	
-	
+
+
     // This is for the innerleft sidebar
     $(".open-left-block").on('click', function() {
         $('.left-block').toggleClass('open-panel');
         $('.open-left-block').toggleClass('mdi-menu');
     });
-	
-	
+
+
     // Upload
     //
     $(document).on('click', '.file-browser', function() {
@@ -1074,9 +1074,29 @@ throw new Error('template requires jQuery')
       $(this).next('.custom-file-control').attr('data-input-value', filename);
     });
     $('.custom-file-control:not([data-input-value])').attr('data-input-value', 'Choose file...');
-	
-	
-	
-	
+
+
+
+	/* The todo list plugin */
+	  $('.todo-list').todoList({
+		onCheck  : function () {
+		  window.console.log($(this), 'The element has been checked');
+		},
+		onUnCheck: function () {
+		  window.console.log($(this), 'The element has been unchecked');
+		}
+	  });
+
+
 }(jQuery) // End of use strict
+
+// Fullscreen
+	$(function () {
+		'use strict'
+
+			$('[data-provide~="fullscreen"]').on('click', function () {
+				screenfull.toggle($('#container')[0]);
+			});
+
+	}); // End of use strict
 

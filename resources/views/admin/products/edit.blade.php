@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('admin.layouts.master')
 
 
 @section('content')
@@ -30,8 +30,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="category_id">دسته بندی محصول</label>
-                            <select name="category_id" id="category_id" class="form-control">
+                            <label class="font-weight-700 font-size-16" id="category_id">دسته بندی محصول</label>
+                            <select name="category_id" id="category_id" class="custom-select form-control">
                                 @foreach($categories as $category)
                                     <option
                                         value="{{$category->id}}"
@@ -40,6 +40,7 @@
                                 @endforeach
                             </select>
                         </div>
+
 
                         <div class="form-group">
                             <label for="brand">برند محصول</label>
