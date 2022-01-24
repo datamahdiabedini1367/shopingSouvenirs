@@ -59,18 +59,37 @@
                                     <td>{{$product->name}}</td>
                                     <th>{{number_format($product->price)}}</th>
                                     <th>{{$product->stock}}</th>
-                                    <th>{{$product->validCoupon}}</th>
+                                    <th>{{$product->discount}}</th>
                                     <th>{{$product->created_at}}</th>
-                                    <td><img src="{{asset('admin/images/product/product-1.png')}}" alt="product" width="80"></td>
+{{--                                    @php--}}
+{{--                                    dd()--}}
+{{--                                    @endphp--}}
+                                    <td><img src="{{$product->first_picture}}" alt="product" width="80"></td>
                                     <td>
-                                        <a href="{{route('admin.products.update' ,['product'=>$product])}}" class="text-info mr-10" data-toggle="tooltip"
+                                        <form action="{{route('admin.products.destroy' ,$product->id)}}" method="post"
+                                              id={{"delete_product_".$product->id}}>
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                        <a href="{{route('admin.products.edit' ,$product->id)}}" class="text-info mr-10" data-toggle="tooltip"
                                            data-original-title="ویرایش">
                                             <i class="ti-marker-alt"></i>
                                         </a>
-                                        <a href="{{route('admin.products.destroy' ,['product'=>$product])}}" class="text-danger" data-original-title="حذف"
-                                           data-toggle="tooltip">
+
+
+                                        <span  class="text-danger " data-toggle="tooltip"
+                                               data-original-title="حذف" onclick="document.getElementById('{{"delete_product_".$product->id}}').submit()">
                                             <i class="ti-trash"></i>
+                                        </span>
+{{--                                        <a href="{{route('admin.products.destroy' ,$product->id)}}" class="text-danger" data-original-title="حذف"--}}
+{{--                                           data-toggle="tooltip">--}}
+{{--                                            <i class="ti-trash"></i>--}}
+{{--                                        </a>--}}
+                                        <a href="{{route('admin.product.pictures.show' ,$product->slug)}}" class="text-info mr-10" data-toggle="tooltip"
+                                           data-original-title="مدیریت تصاویر">
+                                            <i class="ti-camera"></i>
                                         </a>
+
                                     </td>
                                 </tr>
                             @endforeach

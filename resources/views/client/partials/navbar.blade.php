@@ -98,7 +98,7 @@
                                                                                         <li><h4>{{$oneChild->name}}</h4></li>
                                                                                         @if($oneChild->children->count() > 0)
                                                                                             @foreach($oneChild->children as $twoChild)
-                                                                                                <li><a href="products.html">{{$twoChild->name}}</a></li>
+                                                                                                <li><a href="{{route('client.categories.products.index' , $twoChild->id)}}">{{$twoChild->name}}</a></li>
                                                                                             @endforeach
                                                                                         @endif
                                                                                     </ul>

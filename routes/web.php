@@ -105,9 +105,10 @@ Route::get('test',function (){
 
 //--------------------admin panel-----------------
 
-Route::prefix('/')->name('client.')->group(function(){
+Route::prefix('/client')->name('client.')->group(function(){
     Route::resources([
         'products' => \App\Http\Controllers\Client\ProductController::class,
+        'categories.products'=>\App\Http\Controllers\Client\CategoryProductController::class,
     ]);
 
 });
@@ -115,8 +116,14 @@ Route::prefix('/')->name('client.')->group(function(){
 Route::prefix('/adminpanel')->name('admin.')->group(function(){
     Route::resources([
         'products' => ProductController::class,
-        'categories' => CategoryController::class
+        'categories' => CategoryController::class,
+//        'pictures.products' => \App\Http\Controllers\Admin\PictureProductController::class
     ]);
+
+    Route::get('/product/{product:slug}/pictures' , [\App\Http\Controllers\Admin\PictureProductController::class,'show'])->name('product.pictures.show');
+    Route::post('/product/{product:slug}/pictures' , [\App\Http\Controllers\Admin\PictureProductController::class,'store'])->name('product.pictures.store');
+    Route::delete('/picture/{picture}' , [\App\Http\Controllers\Admin\PictureProductController::class,'destroy'])->name('product.pictures.destroy');
+
 
     Route::get('category/subCategory/{category:slug}/create',[CategoryController::class,'create_sub_category'])->name('category.subCategory.create');
 //    Route::post('category/subCategory/{category:slug}',[CategoryController::class,'store_sub_category'])->name('category.subCategory.create');

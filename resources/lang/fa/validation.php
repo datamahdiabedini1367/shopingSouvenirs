@@ -11,13 +11,20 @@ return [
     'email' => ':attribute باید به صورت ایمیل باشد.',
     'unique' => ':attribute تکراری میباشد.',
     'confirmed' => ':attribute مطابقت ندارد.',
+
+
     'max' => [
+        'array' => 'حداکثر تعداد :attribute باید برابر :max باشد',
         'string' => ':attribute حداکثر باید :max کاراکتر باشد.',
-        'integer' => ':attribute باید حداکثر :max عدد باشد.'
+        'integer' => ':attribute باید حداکثر :max عدد باشد.',
+        'file' =>'حداکثر حجم  :attribute  باید برابر :max  کیلو بایت باشد.' ,
     ],
     'min' => [
         'string' => ':attribute باید حداقل :min کاراکتر باشد.',
-        'integer' => ':attribut  باید حداقل  :min باشد.'
+        'integer' => ':attribut  باید حداقل  :min باشد.',
+        'numeric' => 'The :attribute must be at least :min.',
+        'file' => 'حداقل حجم  :attribute باید :min کیلو بایت باشد.',
+        'array' => 'The :attribute must have at least :min items.',
     ],
     'digits' => ':attribute باید :digits رقم باشد.',
     'numeric' => ':attribute باید به صورت عددی باشد.',
@@ -42,7 +49,10 @@ return [
         'price' => 'قیمت کالا',
         'stock' => 'موجودی کالا',
         'percent' => 'درصد تخفیف',
+        'discount' => 'درصد تخفیف',
         'category_name'=>'نام دسته بندی',
+        'files'=>'فایل',
+        'files.*' =>'فایل'
 
     ],
 

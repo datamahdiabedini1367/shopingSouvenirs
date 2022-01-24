@@ -12,13 +12,13 @@ class Product extends Model
     use HasFactory, Couponable;
 
 
-    protected $fillable = ['name', 'description', 'price', 'stock'];
+    protected $fillable = ['name', 'description', 'price', 'stock','category_id','slug'];
 
     protected $perPage = 9;
 
     public function category()
     {
-        return $this->belongsTo(Category::class , 'product_id','id' );
+        return $this->belongsTo(Category::class , 'category_id','id' );
     }
 
     public function pictures()
@@ -37,6 +37,7 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
             ->withPivot('quantity');
     }
+
 
     public function decrementStock(int $count)
     {
@@ -89,6 +90,27 @@ class Product extends Model
     {
         return $this->category->name ?? '';
     }
+
+
+
+    public function getDiscountAttribute()
+    {
+//        dd($this->validCoupon->first());
+        return $this->validCoupon->first()->percent ?? 0;
+    }
+
+
+
+    public function getFirstPictureAttribute()
+    {
+        return !is_null($this->pictures->first())
+            ? str_replace('public','/storage',$this->pictures->first()->path)
+            :'';
+    }
+
+
+
+
 
 
 

@@ -21,6 +21,12 @@ class Coupon extends Model
         'is_active',       // فعال بودن یا نبودن کد تخفیف
     ];
 
+
+    public function couponable()
+    {
+        return $this->morphTo();
+    }
+
     public function isExpired()
     {
             $expireTime = Carbon::parse($this->expire_time);

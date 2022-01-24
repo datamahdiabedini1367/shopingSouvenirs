@@ -20,7 +20,7 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'product_id', 'id');
+        return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
     public function parent()
@@ -37,7 +37,13 @@ class Category extends Model
     public function getParentCategoryNameAttribute()
     {
         return $this->parent->name ?? 'دسته اصلی';
+    }
 
+    public function allSubCategoryProducts()
+    {
+        $childernIds = $this->children()->pluck('id')->get();
+
+        return Product::query()->whereIn('category_id',$childernIds)->get();
     }
 
 }

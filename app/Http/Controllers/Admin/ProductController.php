@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProductRequest;
+use App\Http\Requests\Admin\ProductStoreRequest;
+use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -18,7 +21,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the products.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -29,44 +31,47 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create',compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $this->validateFrom($request);
-        dd($request->all());
-    }
-
-    private function validateFrom(Request $request)
-    {
-        $request->validate([
-            "name" => ['required', ],
-            "price" => ['required', 'numeric', 'min:100'],
-            "stock" => ['required', 'numeric', 'min:0'],
-            "percent" => ['required', 'numeric', 'min:0','max:100'],
+        $product = Product::query()->create([
+            "name" => $request->get('name'),
+            "price" => $request->get('price'),
+            "stock" => $request->get('stock'),
+            "description" => $request->get('description'),
+            'category_id' => $request->get('category_id'),
+            'slug' => Str::random(6),
         ]);
 
+        if ($request->get('percent') !== 0) {
+            $coupon = $product->coupons()->create([
+                'code' => $product->slug,
+                'percent' => $request->get('percent'),
+                'is_active' => 1,
+            ]);
+        }
+
+
+        return redirect()->back()->with('success', "محصول با موفقیت ثبت شد");
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
         //
     }
@@ -74,34 +79,47 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('admin.products.edit', compact('categories', 'product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        $product->update([
+            "name" => $request->get('name', $product->name),
+            "price" => $request->get('price', $product->price),
+            "stock" => $request->get('stock', $product->stock),
+            "description" => $request->get('description', $product->description),
+            'category_id' => $request->get('category_id', $product->category_id),
+        ]);
+
+        $coupon = $product->validCoupon()->update([
+            'percent' => $request->get('percent'),
+            'is_active' => 1,
+        ]);
+
+
+        return redirect()->back()->with('success', "محصول با موفقیت ثبت شد");
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        $product->validCoupon()->delete();
+
+        return redirect()->back()->with('success', "محصول با موفقیت حذف شد");
+
     }
 }

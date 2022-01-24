@@ -57,7 +57,7 @@ class CategoryController extends Controller
             "slug" => Str::random(6),
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success_create_category', 'دسته بندی با موفقیت ثبت شد.');
+        return redirect()->back()->with('success_create_category', 'دسته بندی با موفقیت ثبت شد.');
     }
 
     private function validateForm(Request $request)

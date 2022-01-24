@@ -71,7 +71,10 @@
                                 <button type="reset" class="btn btn-rounded btn-danger">لغو</button>
                             </div>
                         </form>
+                        @include('partials.validation-errors')
+
                     </div>
+
                 </div>
             </div>
         </div>

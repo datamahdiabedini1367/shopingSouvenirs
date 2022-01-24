@@ -22,15 +22,14 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('price');
             $table->integer('stock');
-            $table->double('discount')->default(0);
             $table->string('city')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('cascade')// <===>  ->cascadeOnDelete() //
-                                          //->nullOnDelete() <===> //->onDelete('set null')
+//                ->onDelete('cascade')// <===>  ->cascadeOnDelete() //
+                ->nullOnDelete()// <===> //->onDelete('set null')
                 ->onUpdate('cascade');// <===> ->cascadeOnUpdate();
         });
     }
