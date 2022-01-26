@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProfileController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    private function getUser()
+    {
+        return User::query()->where('id',auth()->user()->id)->first();
+    }
 
     /**
      * Display a listing of the resource.
@@ -18,15 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $categories=Category::all();
-
-        return  view('client.products.index',compact('products' , 'categories'));
-    }
-
-    public function showDetails(Product $product)
-    {
-        return view('client.products.show_detail',compact('product'));
+        //
     }
 
     /**
@@ -53,21 +53,31 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
+        return view('client.profile.show',[
+            'user'=>$this->getUser(),
+        ]);
+    }
+
+    public function showOrdersForm()
+    {
+        return view('client.profile.orders.show',[
+            'orders'=>$this->getUser()->orders
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }
@@ -76,10 +86,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -87,10 +97,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }

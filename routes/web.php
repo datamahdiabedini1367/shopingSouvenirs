@@ -1,21 +1,26 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PictureProductController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\BasketController;
-use App\Http\Controllers\CouponsController;
-use App\Http\Controllers\PaymentController;
-//use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\MagicController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialController;
-use App\Http\Controllers\Auth\MagicController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\Client\AddressController;
+use App\Http\Controllers\Client\CategoryProductController;
+use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\CouponsController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
+
+//use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,105 +40,104 @@ use Illuminate\Support\Facades\URL;
 //    return view('welcome');
 //})->name('home');
 
-Route::get("/adminpanel",function (){
+Route::get("/adminpanel", function () {
     return view('admin.layouts.app');
 });
 
-Route::get("/adminpanel/products/list",function (){
+Route::get("/adminpanel/products/list", function () {
     return view('admin.products.list');
 });
 
-Route::get('/', [ProductController::class,'index'])->name('home');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('basket/add/{product}', [BasketController::class, 'add'])->name('basket.add');
+
+Route::post('basket/add/{product}', [BasketController::class, 'add'])->name('basket.add');
 Route::get('basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
 Route::get('basket', [BasketController::class, 'index'])->name('basket.index');
 Route::post('basket/update/{product}', [BasketController::class, 'update'])->name('basket.update');
+Route::get('basket/destroy/{product}', [BasketController::class, 'destroy'])->name('basket.destroy');
 
 Route::get('basket/checkout', [BasketController::class, 'checkoutForm'])->name('basket.checkout.form');
 Route::post('basket/checkout', [BasketController::class, 'checkout'])->name('basket.checkout');
 
 
-Route::post('payment/{gateway}/callback',[PaymentController::class,'verify'])->name('payment.verify');
+Route::post('payment/{gateway}/callback', [PaymentController::class, 'verify'])->name('payment.verify');
 
 
-Route::group(['prefix'=>'auth','namespace'=>'Auth'],function(){
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
-    Route::get('register',[RegisterController::class,'showRegistrationForm'])->name('auth.register.form');
-    Route::post('register',[RegisterController::class,'register'])->name('auth.register');
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('auth.register.form');
+    Route::post('register', [RegisterController::class, 'register'])->name('auth.register');
 
-    Route::get('login',[LoginController::class,'showLoginForm'])->name('auth.login.form');
-    Route::post('login',[LoginController::class,'login'])->name('auth.login');
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('auth.login.form');
+    Route::post('login', [LoginController::class, 'login'])->name('auth.login');
 
-    Route::get('logout',[LoginController::class,'logout'])->name('auth.logout');
+    Route::get('logout', [LoginController::class, 'logout'])->name('auth.logout');
 
-    Route::get('email/send-verification',[VerificationController::class,'send'])->name('auth.email.send.verification');
-    Route::get('email/verify',[VerificationController::class,'verify'])->name('auth.email.verify');
+    Route::get('email/send-verification', [VerificationController::class, 'send'])->name('auth.email.send.verification');
+    Route::get('email/verify', [VerificationController::class, 'verify'])->name('auth.email.verify');
 
-    Route::get('password/forget',[ForgotPasswordController::class,'showForgetForm'])->name('auth.password.forget.form');
-    Route::post('password/forget',[ForgotPasswordController::class,'sendResetLink'])->name('auth.password.forget');
+    Route::get('password/forget', [ForgotPasswordController::class, 'showForgetForm'])->name('auth.password.forget.form');
+    Route::post('password/forget', [ForgotPasswordController::class, 'sendResetLink'])->name('auth.password.forget');
 
-    Route::get('password/reset',[ResetPasswordController::class,'showResetForm'])->name('auth.password.reset.form');
-    Route::post('password/reset',[ResetPasswordController::class,'reset'])->name('auth.password.reset');
+    Route::get('password/reset', [ResetPasswordController::class, 'showResetForm'])->name('auth.password.reset.form');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('auth.password.reset');
 
-    Route::get('redirect/{provider}',[SocialController::class,'redirectToProvider'])->name('auth.login.provider.redirect');
+    Route::get('redirect/{provider}', [SocialController::class, 'redirectToProvider'])->name('auth.login.provider.redirect');
 
-    Route::get('{provider}/callback',[SocialController::class,'callbackProvider'])->name('auth.login.provider.callback');
+    Route::get('{provider}/callback', [SocialController::class, 'callbackProvider'])->name('auth.login.provider.callback');
 
-    Route::get('magic/login',[MagicController::class,'ShowMagicForm'])->name('auth.magic.login.form');
-    Route::post('magic/login',[MagicController::class,'sendToken'])->name('auth.magic.send.token');
-    Route::get('magic/login/{token}',[MagicController::class,'login'])->name('auth.magic.login');
+    Route::get('magic/login', [MagicController::class, 'ShowMagicForm'])->name('auth.magic.login.form');
+    Route::post('magic/login', [MagicController::class, 'sendToken'])->name('auth.magic.send.token');
+    Route::get('magic/login/{token}', [MagicController::class, 'login'])->name('auth.magic.login');
 
 });
 
 
-
-Route::post('coupon' , [CouponsController::class , 'apply'])->name('coupon.apply');
-Route::get('coupon' , [CouponsController::class , 'remove'])->name('coupon.remove');
-
-Route::get('test',function (){
-
-    $product = \App\Models\Product::query()->find(1);
-//    dd($product->category->coupons);
-    dd($product->category->validCoupons);
-    return "hi";
-})->name('test');
+Route::post('coupon', [CouponsController::class, 'apply'])->name('coupon.apply');
+Route::get('coupon', [CouponsController::class, 'remove'])->name('coupon.remove');
 
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//--------------------client panel-----------------
 
-//--------------------admin panel-----------------
-
-Route::prefix('/client')->name('client.')->group(function(){
+Route::name('client.')->group(function () {
     Route::resources([
-        'products' => \App\Http\Controllers\Client\ProductController::class,
-        'categories.products'=>\App\Http\Controllers\Client\CategoryProductController::class,
+        'products' => ClientProductController::class,
+        'categories.products' => CategoryProductController::class,
     ]);
 
+    Route::get('/profile/addresses', [AddressController::class, 'index'])->name('profile.address.index');
+    Route::post('/profile/address', [AddressController::class, 'store'])->name('profile.address.store');
+
+    Route::get('/profile/address/{address:id}/edit', [AddressController::class, 'edit'])->name('profile.address.edit');
+
+    Route::post('/profile/address/change_default/{address:slug}', [AddressController::class, 'change_default'])->name('profile.address.changeDefault');
+    Route::patch('/profile/address/{address:slug}', [AddressController::class, 'update'])->name('profile.address.update');
+    Route::delete('/profile/address/{address:slug}', [AddressController::class, 'destroy'])->name('profile.address.destroy');
+
+    Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/orders/show', [ProfileController::class, 'showOrdersForm'])->name('profile.orders.show');
+    Route::get('product/show/{product:slug}', [ClientProductController::class, 'showDetails'])->name('product.show_detail');
+
 });
 
-Route::prefix('/adminpanel')->name('admin.')->group(function(){
+Route::prefix('/adminpanel')->name('admin.')->group(function () {
     Route::resources([
         'products' => ProductController::class,
         'categories' => CategoryController::class,
 //        'pictures.products' => \App\Http\Controllers\Admin\PictureProductController::class
+        'order' => OrderController::class,
     ]);
 
-    Route::get('/product/{product:slug}/pictures' , [\App\Http\Controllers\Admin\PictureProductController::class,'show'])->name('product.pictures.show');
-    Route::post('/product/{product:slug}/pictures' , [\App\Http\Controllers\Admin\PictureProductController::class,'store'])->name('product.pictures.store');
-    Route::delete('/picture/{picture}' , [\App\Http\Controllers\Admin\PictureProductController::class,'destroy'])->name('product.pictures.destroy');
+    Route::get('/product/{product:slug}/pictures', [PictureProductController::class, 'show'])->name('product.pictures.show');
+    Route::post('/product/{product:slug}/pictures', [PictureProductController::class, 'store'])->name('product.pictures.store');
+    Route::delete('/picture/{picture}', [PictureProductController::class, 'destroy'])->name('product.pictures.destroy');
 
 
-    Route::get('category/subCategory/{category:slug}/create',[CategoryController::class,'create_sub_category'])->name('category.subCategory.create');
-//    Route::post('category/subCategory/{category:slug}',[CategoryController::class,'store_sub_category'])->name('category.subCategory.create');
+    Route::get('category/subCategory/{category:slug}/create', [CategoryController::class, 'create_sub_category'])->name('category.subCategory.create');
+
 
 });
+Route::get('/', [ClientProductController::class, 'index'])->name('home');
 
-
-
-//Route::resources([
-//    'products' => ProductController::class,
-//]);
 
 

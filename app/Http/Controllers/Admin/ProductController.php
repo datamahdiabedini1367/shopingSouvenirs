@@ -100,10 +100,19 @@ class ProductController extends Controller
             'category_id' => $request->get('category_id', $product->category_id),
         ]);
 
-        $coupon = $product->validCoupon()->update([
-            'percent' => $request->get('percent'),
-            'is_active' => 1,
-        ]);
+        if ($request->get('percent') !== 0 && $product->validCoupon()->count()<1) {
+
+            $product->validCoupon()->Create([
+                'percent' => $request->get('percent'),
+                'is_active' => 1,
+                'code' => $product->slug,
+            ]);
+        }else {
+            $product->validCoupon()->update([
+                'percent' => $request->get('percent'),
+                'is_active' => 1
+                ]);
+        }
 
 
         return redirect()->back()->with('success', "محصول با موفقیت ثبت شد");

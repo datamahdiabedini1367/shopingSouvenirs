@@ -12,19 +12,24 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap 4.0-->
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor_components/bootstrap/dist/css/bootstrap.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('admin/assets/vendor_components/bootstrap/dist/css/bootstrap.css')}}">
 
     <!-- daterange picker -->
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 
     <!-- Data Table-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/assets/vendor_components/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('admin/assets/vendor_components/datatable/datatables.min.css')}}">
 
     <!-- Chartist-->
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor_components/chartist-js-develop/chartist.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('admin/assets/vendor_components/chartist-js-develop/chartist.css')}}">
 
     <!-- Bootstrap extend-->
-    <link rel="stylesheet" href="{{asset('admin/css/bootstrap-extend.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('admin/css/bootstrap-extend.css')}}">
 
     <!-- Admin main-nav -->
     <link href="{{asset('admin/css/main-nav.css')}}" rel="stylesheet">
@@ -180,7 +185,7 @@
             <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" ><i class="ti-dashboard mx-5"></i> داشبورد فروشگاهی</a></li>
             <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.categories.index' ) class="current" @endif href="{{route('admin.categories.index')}}" ><i class="ti-files mx-5"></i></i> دسته بندی کالا</a></li>
             <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.products.index') class="current" @endif href="{{route('admin.products.index')}}" ><i class="ti-files mx-5"></i></i> محصولات</a></li>
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" ><i class="ti-layout-grid2 mx-5"></i> سفارشات</a></li>
+            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.order.index") @endif href="{{route('admin.order.index')}}" ><i class="ti-layout-grid2 mx-5"></i> سفارشات</a></li>
             <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" ><i class="ti-pencil-alt mx-5"></i> مشتریان</a></li>
 
         </ul>
@@ -210,41 +215,54 @@
 
 
 <!-- jQuery 3 -->
-<script src="{{asset('admin/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js')}}"></script>
 
 <!-- fullscreen -->
-<script src="{{asset('admin/assets/vendor_components/screenfull/screenfull.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/screenfull/screenfull.js')}}"></script>
 
 <!-- popper -->
-<script src="{{asset('admin/assets/vendor_components/popper/dist/popper.min.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/popper/dist/popper.min.js')}}"></script>
 
 <!-- Bootstrap 4.0-->
-<script src="{{asset('admin/assets/vendor_components/bootstrap/dist/js/bootstrap.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/bootstrap/dist/js/bootstrap.js')}}"></script>
 
 <!-- Slimscroll -->
-<script src="{{asset('admin/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
 
 <!-- date-range-picker -->
-<script src="{{asset('admin/assets/vendor_components/moment/min/moment.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/moment/min/moment.min.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
 <!-- Sparkline -->
-<script src="{{asset('admin/assets/vendor_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
 
 <!-- eChart Plugins -->
-<script src="{{asset('admin/assets/vendor_components/echarts/dist/echarts-en.min.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/echarts/dist/echarts-en.min.js')}}"></script>
 
 <!-- Chartist  -->
-<script src="{{asset('admin/assets/vendor_components/chartist-js-develop/chartist.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/chartist-js-develop/chartist.js')}}"></script>
 
 <!-- FastClick -->
-<script src="{{asset('admin/assets/vendor_components/fastclick/lib/fastclick.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/fastclick/lib/fastclick.js')}}"></script>
 
 <!-- This is data table -->
-<script src="{{asset('admin/assets/vendor_components/datatable/datatables.min.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/datatable/datatables.min.js')}}"></script>
 
 <!-- apexcharts -->
-<script src="{{asset('admin/assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>
+<script
+    src="{{asset('admin/assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>
 {{--<script src="../admin/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>--}}
 
 <!-- CrmX Admin App -->

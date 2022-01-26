@@ -119,7 +119,7 @@ class Transaction
         session()->forget('coupon');
 
 
-        $this->user->coupons()->last();
+//        $this->user->coupons()->last();
 
         return $order;
     }

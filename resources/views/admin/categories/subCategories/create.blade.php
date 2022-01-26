@@ -43,7 +43,7 @@
                                         <div class="form-group">
 
                                             <label class="font-weight-700 font-size-16">نام دسته بندی</label>
-                                            <input type="text" class="form-control" placeholder="نام دسته بندی" name="name" value="{{old('name')}}">
+                                            <input type="text" class="form-control" placeholder="نام دسته بندی" name="category_name" value="{{old('category_name')}}">
                                         </div>
                                     </div>
                                 <!--{{--                                    <div class="col-md-6">--}}
@@ -76,6 +76,8 @@
                                 <button type="reset" class="btn btn-rounded btn-danger">لغو</button>
                             </div>
                         </form>
+
+                        @include('partials.validation-errors')
                     </div>
                 </div>
             </div>

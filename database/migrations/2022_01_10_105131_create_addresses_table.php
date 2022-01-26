@@ -16,10 +16,16 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('state');
-            $table->string('city');
-            $table->string('address');
-            $table->string('postal_code');
+            $table->string('title')->comment('عنوان');
+            $table->string('state')->comment('استان');
+            $table->string('city')->comment('شهر');
+            $table->text('address')->comment('آدرس کامل');
+            $table->text('description')->comment('توضیحات')->nullable();
+            $table->string('postal_code')->comment('کد پستی');
+            $table->string('receiver')->nullable()->comment('نام تحویل گیرنده');
+            $table->string('phone_number')->nullable()->comment('شماره تماس');
+            $table->string('slug');
+            $table->tinyInteger('default')->nullable();
 
 
             $table->foreign('user_id')

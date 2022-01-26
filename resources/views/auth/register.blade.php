@@ -53,7 +53,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="lastname">@lang('auth.lastname')</label>
-                                        <input type="text" class="form-control" id="lastname"
+                                        <input type="text" class="form-control"
+                                               id="lastname"
+                                               value="{{old('lastname')}}"
                                                name="lastname"
                                                placeholder="@lang('auth.enter your lastname')"
                                         >
@@ -61,8 +63,9 @@
 
                                     <div class="form-group">
                                         <label for="mobile">@lang('auth.mobile')</label>
-                                        <input value="{{old('mobile')}}"
-                                               name="mobile" type="tel"
+                                        <input type="tel"
+                                               value="{{old('mobile')}}"
+                                               name="mobile"
                                                class="form-control"
                                                id="mobile"
                                                placeholder="@lang('auth.enter your mobile')"

@@ -19,4 +19,12 @@ class Picture extends Model
     {
         return $this->belongsTo(Product::class,'product_id','id');
     }
+
+    public function getAddressAttribute()
+    {
+
+        return !is_null($this->path)
+            ? str_replace('public','/storage',$this->path)
+            :'';
+    }
 }

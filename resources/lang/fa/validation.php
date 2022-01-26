@@ -17,7 +17,7 @@ return [
         'array' => 'حداکثر تعداد :attribute باید برابر :max باشد',
         'string' => ':attribute حداکثر باید :max کاراکتر باشد.',
         'integer' => ':attribute باید حداکثر :max عدد باشد.',
-        'file' =>'حداکثر حجم  :attribute  باید برابر :max  کیلو بایت باشد.' ,
+        'file' => 'حداکثر حجم  :attribute  باید برابر :max  کیلو بایت باشد.',
     ],
     'min' => [
         'string' => ':attribute باید حداقل :min کاراکتر باشد.',
@@ -50,9 +50,17 @@ return [
         'stock' => 'موجودی کالا',
         'percent' => 'درصد تخفیف',
         'discount' => 'درصد تخفیف',
-        'category_name'=>'نام دسته بندی',
-        'files'=>'فایل',
-        'files.*' =>'فایل'
+        'category_name' => 'نام دسته بندی',
+        'files' => 'فایل',
+        'files.*' => 'فایل',
+        'title' =>'عنوان آدرس',
+        'city' =>'شهر',
+        'state' =>'استان',
+        'address' =>'نشانی',
+        'description' =>'توضیحات',
+        'postal_code' =>'کد پستی',
+        'receiver' =>'تحویل گیرنده',
+        'phone_number' =>'شماره تماس',
 
     ],
 

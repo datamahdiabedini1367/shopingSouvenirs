@@ -39,6 +39,11 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
+    public function getIsVerifyEmailAttribute()
+    {
+        return !is_null($this->email_verified_at) ? 'تایید شده':'تایید  نشده';
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -68,9 +73,35 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
 
+    public function address_default()
+    {
+        return $this->addresses()->where('default' ,1)->first();
+    }
+
     public function sendPasswordResetNotification($token)
     {
         SendEmail::dispatch($this, new ResetPassword($this, $token));
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'user_id' ,'id');
+    }
+
+
+    public function latestOrder()
+    {
+        return $this->hasOne(Order::class)->latestOfMany();
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+
+    public function getHasAddressDefaultAttribute()
+    {
+        return $this->addresses()->where('default' ,1)->exists();
     }
 
 }

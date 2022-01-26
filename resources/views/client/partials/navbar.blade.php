@@ -1,6 +1,7 @@
 @inject('categories' , 'App\Http\Controllers\Admin\CategoryController')
 @inject('products' , 'App\Http\Controllers\Admin\ProductController')
 
+@inject('basket' , 'App\Support\Basket\Basket')
 
 <section id="header">
     <!-- Top NavBar -->
@@ -50,8 +51,10 @@
                             @endauth
                         </div>
                         <div class="col-12 col-md-5 col-lg-6">
-                            <a href="cart.html">
-                                <div class="btn btn-warning w-100"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="d-md-none d-lg-inline-block">سبد خرید</span> (2)</div>
+                            <a href="{{route('basket.index')}}">
+                                <div class="btn btn-warning w-100">
+                                    <i class="fa fa-shopping-cart"></i>&nbsp;
+                                    <span class="d-md-none d-lg-inline-block">سبد خرید</span> ({{$basket->itemCount()}})</div>
                             </a>
                         </div>
                     </div>
@@ -78,7 +81,7 @@
                                     <div class="droopmenu-navi">
                                         <ul class="droopmenu">
                                             <li class="encoded-54566542" aria-haspopup="true">
-                                                <a href="#" aria-expanded="false"><i class="fa fa-bars"></i>&nbsp;&nbsp;دسته بندی محصولات<em class="droopmenu-topanim"></em></a>
+                                                <a href="{{route('home')}}" aria-expanded="false"><i class="fa fa-bars"></i>&nbsp;&nbsp;دسته بندی محصولات<em class="droopmenu-topanim"></em></a>
                                                 <div class="dm-arrow"></div>
                                                 <ul class="droopmenu-grid droopmenu-grid-9">
                                                     <li class="droopmenu-tabs droopmenu-tabs-vertical">
@@ -103,9 +106,9 @@
                                                                                         @endif
                                                                                     </ul>
                                                                                 @endforeach
-                                                                            {{--                                                                        <ul class="droopmenu-col droopmenu-col4 d-none d-lg-inline-block">--}}
-                                                                            {{--                                                                            <li><img src="assets/images/megamenu/megamenu-image1.png" alt=""></li>--}}
-                                                                            {{--                                                                        </ul>--}}
+                                                                            {{--<ul class="droopmenu-col droopmenu-col4 d-none d-lg-inline-block">--}}
+                                                                            {{--    <li><img src="assets/images/megamenu/megamenu-image1.png" alt=""></li>--}}
+                                                                            {{--</ul>--}}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -124,13 +127,13 @@
 
                                             @auth
                                                 <li class="encoded-54566542" aria-haspopup="true">
-                                                    <a href="profile/personal-info.html" aria-expanded="false">پروفایل کاربری<em class="droopmenu-topanim"></em></a>
+                                                    <a href="{{route('client.profile.show')}}" aria-expanded="false">پروفایل کاربری<em class="droopmenu-topanim"></em></a>
                                                     <div class="dm-arrow"></div>
                                                     <ul style="">
-                                                        <li><a href="profile/personal-info.html">مشخصات کاربری</a></li>
-                                                        <li><a href="profile/factors.html">سفارشات</a></li>
-                                                        <li><a href="profile/addresses.html">آدرس ها</a></li>
-                                                        <li><a href="profile/favorites.html">علاقه مندی ها</a></li>
+                                                        <li><a href="{{route('client.profile.show')}}">مشخصات کاربری</a></li>
+                                                        <li><a href="{{route('client.profile.orders.show')}}">سفارشات</a></li>
+                                                        <li><a href="{{route('client.profile.address.index')}}">آدرس ها</a></li>
+{{--                                                        <li><a href="profile/favorites.html">علاقه مندی ها</a></li>--}}
                                                         <li><a href="{{route('auth.logout')}}">خروج</a></li>
                                                         <form id="logout-form" action="/logout" method="POST" style="display: none;">
                                                             @csrf

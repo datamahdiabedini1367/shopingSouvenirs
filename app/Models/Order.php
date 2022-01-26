@@ -63,6 +63,19 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id' , 'id');
-
     }
+
+    public function getPaymentStatusAttribute()
+    {
+        return $this->payment->status?"پرداخت شده":"پرداخت نشده";
+    }
+
+    public function getPaymentMethodAttribute()
+    {
+        if ($this->payment->method ==='online')
+            return "آنلاین";
+        elseif ($this->payment->method ==='cash')
+            return "نقدی";
+    }
+
 }

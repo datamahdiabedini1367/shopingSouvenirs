@@ -57,7 +57,7 @@
                                     <td>{{$product->category_name}}</td>
                                     {{--                                                'name', 'description', 'price', 'stock'--}}
                                     <td>{{$product->name}}</td>
-                                    <th>{{number_format($product->price)}}</th>
+                                    <th>{{$product->price_formated}}</th>
                                     <th>{{$product->stock}}</th>
                                     <th>{{$product->discount}}</th>
                                     <th>{{$product->created_at}}</th>

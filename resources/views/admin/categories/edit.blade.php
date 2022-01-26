@@ -46,7 +46,7 @@
                                         <div class="form-group">
 
                                             <label class="font-weight-700 font-size-16">نام دسته بندی</label>
-                                            <input type="text" class="form-control" placeholder="نام محصول" name="category_name" value="{{$category->name}}">
+                                            <input type="text" class="form-control" placeholder="نام محصول" name="category_name" value="{{$category->category_name}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

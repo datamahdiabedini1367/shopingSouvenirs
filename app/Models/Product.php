@@ -46,28 +46,9 @@ class Product extends Model
 
     public function getPriceWithDiscountAttribute()
     {
-//        $coupons = $this->category->validCoupons();
-//        if ($coupons->isNotEmpty()){
-//            $discountCalculator= resolve(DiscountCalculator::class);
-//            return $discountCalculator->discountedPrice($coupons->last() , $price);
-//        }
-//        return  $price;
-
-
         $coupon = $this->validCoupon;
-//        if ($this->id ===3)
-//            dd($coupon());
         if ($coupon->isNotEmpty()) {
             $discountCalculator = resolve(DiscountCalculator::class);
-//                    dd(
-//                        'getPriceAttribute:',
-//                        $coupons ,
-//                        $coupons->isNotEmpty(),
-//                        $coupons->last(),
-//                        $this->price ,
-//                        $discountCalculator->discountedPrice($coupons->last() ,$this->price)
-//                    );
-//$coupons=
             return $discountCalculator->discountedPrice($coupon->first(), $this->price);
         }
         return $this->price;
@@ -78,7 +59,6 @@ class Product extends Model
     {
         $coupon = $this->validCoupon->first();
 
-//        dd($coupon);
         if ($coupon) {
             return $coupon->percent;
         }
@@ -95,7 +75,6 @@ class Product extends Model
 
     public function getDiscountAttribute()
     {
-//        dd($this->validCoupon->first());
         return $this->validCoupon->first()->percent ?? 0;
     }
 
@@ -107,6 +86,33 @@ class Product extends Model
             ? str_replace('public','/storage',$this->pictures->first()->path)
             :'';
     }
+
+
+    public function getImageAttribute()
+    {
+        return $this->getFirstPictureAttribute();
+    }
+
+    public function getRelatedProductAttribute($id)
+    {
+        return $this->category->products()->where('id' ,'!=' ,$id)->get();
+
+    }
+
+    public function getPriceFormatedAttribute()
+    {
+        return number_format($this->price);
+    }
+
+//    public function getQuantityAttribute()
+//    {
+//        dd(session()->all());
+//    }
+
+//    public function getTotalPriceAttribute()
+//    {
+//        return ($this->getPriceWithDiscountAttribute() * $this->orders()->quantity);
+//    }
 
 
 

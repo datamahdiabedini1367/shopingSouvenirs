@@ -6,47 +6,79 @@
 
 @section('content')
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        @include('partials.alerts')
-        <div class="card">
-            <div class="card-header">
-                @lang('auth.reset password')
+
+
+
+    <section class="inner-page" id="contact-page">
+        <div class="container-fluid" id="page-hero">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 px-0">
+                                <h1>تغییر رمز عبور</h1>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active" aria-current="page">تغییر رمز عبور</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-            <form method="POST" action="
-{{--{{route('auth.password.reset')}}--}}
-                ">
-                    @csrf
-                <input type="hidden" name="token" value="{{$token}} ">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label" for="email">@lang('auth.email')</label>
-                        <div class="col-sm-9">
-                        <input type="email" name="email" class="form-control" id="email" readonly value="{{$email}}"
-                                aria-describedby="emailHelp" placeholder="@lang('auth.enter your email')">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label" for="password">@lang('auth.password')</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="password" class="form-control" id="password"
-                                placeholder="@lang('auth.enter your password')">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label" for="password_confirmation">@lang('auth.confirm password')</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="password_confirmation" class="form-control"
-                                id="password_confirmation" placeholder="@lang('auth.confirm your password')">
-                        </div>
-                    </div>
-                    <div class="col-sm-9 offset-sm-3">
-                        @include('partials.validation-errors')
-                    </div>
-                    <button type="submit" class="btn btn-primary">@lang('auth.reset password')</button>
-            </form>
         </div>
-    </div>
-</div>
+
+        <div class="container py-2 py-md-5">
+            @include('partials.alerts')
+            <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-12 col-lg-5 text-center">
+                                <img src="{{asset('client/assets/images/login.png')}}" alt="">
+                            </div>
+                            <div class="col-12 col-lg-7 pt-5 pt-md-0 align-self-center">
+                                <div class="title">تغییر رمز عبور</div>
+                                <form method="POST" action="{{route('auth.password.reset')}}">
+                                    @csrf
+                                    <input type="hidden" name="token" value="{{$token}} ">
+
+                                    <div class="form-group">
+                                        <label for="email">ایمیل</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               readonly value="{{$email}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">رمز عبور</label>
+                                        <input type="password" class="form-control" id="password"
+                                               name="password" placeholder="رمز عبور خود را وارد کنید">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirmation">تکرار رمز عبور</label>
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                               name="password_confirmation" placeholder="تکرار رمز عبور خود را وارد کنید">
+                                    </div>
+                                    <div class="form-group">
+                                        @include('partials.validation-errors')
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">تغییر رمز عبور</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
 
 @endsection

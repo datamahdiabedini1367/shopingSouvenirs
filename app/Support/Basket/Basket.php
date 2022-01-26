@@ -19,9 +19,9 @@ class Basket
 
     public function add(Product $product, int $quantity)
     {
-        if ($this->has($product)) {
-            $quantity += $this->get($product)['quantity'];
-        }
+//        if ($this->has($product)) {
+//            $quantity += $this->get($product)['quantity'];
+//        }
 
         $this->update($product, $quantity);
     }
