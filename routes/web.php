@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PictureProductController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\MagicController;
@@ -40,14 +43,10 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //})->name('home');
 
-Route::get("/adminpanel", function () {
-    return view('admin.layouts.app');
-});
 
 Route::get("/adminpanel/products/list", function () {
     return view('admin.products.list');
 });
-
 
 
 Route::post('basket/add/{product}', [BasketController::class, 'add'])->name('basket.add');
@@ -105,6 +104,10 @@ Route::name('client.')->group(function () {
         'categories.products' => CategoryProductController::class,
     ]);
 
+    Route::get('product/search',[ClientProductController::class,'search'])->name('products.search');
+
+
+
     Route::get('/profile/addresses', [AddressController::class, 'index'])->name('profile.address.index');
     Route::post('/profile/address', [AddressController::class, 'store'])->name('profile.address.store');
 
@@ -120,7 +123,7 @@ Route::name('client.')->group(function () {
 
 });
 
-Route::prefix('/adminpanel')->name('admin.')->group(function () {
+Route::prefix('/panel')->name('admin.')->middleware('role:admin')->group(function () {
     Route::resources([
         'products' => ProductController::class,
         'categories' => CategoryController::class,
@@ -133,8 +136,48 @@ Route::prefix('/adminpanel')->name('admin.')->group(function () {
     Route::delete('/picture/{picture}', [PictureProductController::class, 'destroy'])->name('product.pictures.destroy');
 
 
-    Route::get('category/subCategory/{category:slug}/create', [CategoryController::class, 'create_sub_category'])->name('category.subCategory.create');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::post('users/{user}/edit', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
+
+
+    Route::get('roles/{role}/edit',[RoleController::class,'edit'])->name('roles.edit');
+    Route::post('roles/{role}/edit',[RoleController::class,'update'])->name('roles.update');
+
+
+    Route::delete('roles/{role}',[RoleController::class,'destroy'])->name('roles.destroy');
+
+
+
+    Route::get('dashboard' , [DashboardController::class,'index'])->name('dashboard');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get("/", function () {
+        return view('admin.layouts.app');
+    })->name('panel.home');
+
+
+    Route::get('category/subCategory/{category:slug}/create', [CategoryController::class, 'create_sub_category'])->name('category.subCategory.create');
 
 });
 Route::get('/', [ClientProductController::class, 'index'])->name('home');

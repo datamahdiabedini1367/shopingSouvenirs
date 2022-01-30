@@ -15,7 +15,7 @@ class Category extends Model
         'description',
         'slug',
         'icon',
-        'category_id'
+        'parent_id'
     ];
 
     public function products()
@@ -45,5 +45,21 @@ class Category extends Model
 
         return Product::query()->whereIn('category_id',$childernIds)->get();
     }
+
+
+
+//    public function subCateogry($category_id)
+//    {
+//        $category = Category::query()->where('id',$category_id)->first();
+//        $category_item = [];
+//        while(!is_null($category->category_id)){
+//            $category_item[]=$category->id;
+//
+//            $category = Category::query()->where('id',$category->category_id)->first();
+//            dump($category);
+//        }
+//        $category_item[]=$category->id;
+//
+//    }
 
 }

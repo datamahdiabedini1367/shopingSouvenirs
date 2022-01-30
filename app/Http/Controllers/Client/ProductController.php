@@ -16,8 +16,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+//        dd('index',$request->all() ) ;
         $products = Product::all();
         $categories=Category::all();
 
@@ -94,4 +95,13 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $products = Product::filters($request)->get();
+
+        $categories=Category::all();
+        return  view('client.products.index',compact('products' , 'categories'));
+    }
+
 }

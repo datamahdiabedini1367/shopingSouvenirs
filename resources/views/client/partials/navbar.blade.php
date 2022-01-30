@@ -33,8 +33,12 @@
                 </div>
                 <div class="col-12 col-md-5 col-xl-6">
                     <div id="encoded-5436543">
-                        <i class="fa fa-search"></i>
-                        <input type="text" placeholder="جستجو کنید...">
+                        <form action="{{route('client.products.search')}}" method="get">
+                        <input type="text" placeholder="جستجو کنید..." name="product_name">
+                        <button type="submit" class="btn btn-sm border-0 m-0 p-0">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
@@ -81,44 +85,50 @@
                                     <div class="droopmenu-navi">
                                         <ul class="droopmenu">
                                             <li class="encoded-54566542" aria-haspopup="true">
-                                                <a href="{{route('home')}}" aria-expanded="false"><i class="fa fa-bars"></i>&nbsp;&nbsp;دسته بندی محصولات<em class="droopmenu-topanim"></em></a>
-                                                <div class="dm-arrow"></div>
-                                                <ul class="droopmenu-grid droopmenu-grid-9">
-                                                    <li class="droopmenu-tabs droopmenu-tabs-vertical">
-                                                        @if($categories->list()->count() > 0)
-                                                            @foreach($categories->list() as $category)
+                                                <a href="{{route('home')}}"
+{{--                                                   aria-expanded="false"--}}
+                                                >
+                                                    <i class="fa fa-bars"></i>
+                                                    &nbsp;&nbsp;محصولات
+{{--                                                    <em class="droopmenu-topanim"></em>--}}
+                                                </a>
+{{--                                                <div class="dm-arrow"></div>--}}
+{{--                                                <ul class="droopmenu-grid droopmenu-grid-9">--}}
+{{--                                                    <li class="droopmenu-tabs droopmenu-tabs-vertical">--}}
+{{--                                                        @if($categories->list()->count() > 0)--}}
+{{--                                                            @foreach($categories->list() as $category)--}}
+{{----}}
+{{--                                                                @if($category->children->count() > 0)--}}
+{{----}}
+{{--                                                                <div class="encoded-54566653436543 droopmenu-tab" id="droopmenutab{{$category->id}}">--}}
+{{--                                                                    <a class="droopmenu-tabheader" href="#">{{$category->name}}</a>--}}
+{{--                                                                    <div class="droopmenu-tabcontent">--}}
+{{--                                                                        <div class="droopmenu-row">--}}
+{{----}}
+{{--                                                                                @foreach($category->children as $oneChild)--}}
+{{----}}
+{{--                                                                                    <ul class="droopmenu-col droopmenu-col4">--}}
+{{--                                                                                        <li><h4>{{$oneChild->name}}</h4></li>--}}
+{{--                                                                                        @if($oneChild->children->count() > 0)--}}
+{{--                                                                                            @foreach($oneChild->children as $twoChild)--}}
+{{--                                                                                                <li><a href="{{route('client.categories.products.index' , $twoChild->id)}}">{{$twoChild->name}}</a></li>--}}
+{{--                                                                                            @endforeach--}}
+{{--                                                                                        @endif--}}
+{{--                                                                                    </ul>--}}
+{{--                                                                                @endforeach--}}
+{{--                                                                            --}}{{--<ul class="droopmenu-col droopmenu-col4 d-none d-lg-inline-block">--}}
+{{--                                                                            --}}{{--    <li><img src="assets/images/megamenu/megamenu-image1.png" alt=""></li>--}}
+{{--                                                                            --}}{{--</ul>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                                @endif--}}
 
-                                                                @if($category->children->count() > 0)
+{{--                                                            @endforeach--}}
+{{--                                                        @endif--}}
 
-                                                                <div class="encoded-54566653436543 droopmenu-tab" id="droopmenutab{{$category->id}}">
-                                                                    <a class="droopmenu-tabheader" href="#">{{$category->name}}</a>
-                                                                    <div class="droopmenu-tabcontent">
-                                                                        <div class="droopmenu-row">
-
-                                                                                @foreach($category->children as $oneChild)
-
-                                                                                    <ul class="droopmenu-col droopmenu-col4">
-                                                                                        <li><h4>{{$oneChild->name}}</h4></li>
-                                                                                        @if($oneChild->children->count() > 0)
-                                                                                            @foreach($oneChild->children as $twoChild)
-                                                                                                <li><a href="{{route('client.categories.products.index' , $twoChild->id)}}">{{$twoChild->name}}</a></li>
-                                                                                            @endforeach
-                                                                                        @endif
-                                                                                    </ul>
-                                                                                @endforeach
-                                                                            {{--<ul class="droopmenu-col droopmenu-col4 d-none d-lg-inline-block">--}}
-                                                                            {{--    <li><img src="assets/images/megamenu/megamenu-image1.png" alt=""></li>--}}
-                                                                            {{--</ul>--}}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                @endif
-
-                                                            @endforeach
-                                                        @endif
-
-                                                    </li>
-                                                </ul>
+{{--                                                    </li>--}}
+{{--                                                </ul>--}}
                                             </li>
 
 
@@ -141,6 +151,11 @@
                                                     </ul>
                                                 </li>
                                             @endauth
+                                            @role('admin')
+                                            <li><a href="{{route('admin.dashboard')}}">بخش مدیریت سایت<em class="droopmenu-topanim"></em></a></li>
+                                            @endrole
+
+
 
 
                                         </ul>

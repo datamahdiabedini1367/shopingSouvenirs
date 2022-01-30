@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title' ,"ثبت محصول جدید")
+@section('title' ,"ویرایش محصول ")
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

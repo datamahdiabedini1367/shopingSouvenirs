@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <section class="inner-page" id="products-page">
+    <section class="inner-page" id="products-page" xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid" id="page-hero">
             <div class="row">
                 <div class="col-12">
@@ -35,6 +35,8 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 px-3 px-lg-0">
                                 <!-- Side Panel -->
+                                <form action="{{route('client.products.search')}}" method="get" >
+
                                 <div class="accordion filters-container">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
@@ -44,11 +46,12 @@
                                             </button>
                                         </h2>
                                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
                                             <div class="accordion-body">
 
                                                 @foreach($categories as $category)
                                                     <div class="form-group">
-                                                        <input type="checkbox" id="category{{$category->id}}">
+                                                        <input type="checkbox" id="category{{$category->id}}" name="category[]" value="{{$category->id}}">
                                                         <label for="category1">{{$category->name}}</label>
                                                     </div>
                                                 @endforeach
@@ -58,64 +61,70 @@
                                     </div>
                                 </div>
 
-                                <div class="accordion filters-container mt-3">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingTwo">
-                                            <button class="accordion-button py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
-                                                    aria-controls="collapseTwo">
-                                                محدوده قیمت
-                                            </button>
-                                        </h2>
-                                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <div class="row">
-                                                    <div class="col-12 py-1 px-4 mt-3">
-                                                        <div id="steps-slider" dir="rtl"></div>
-                                                    </div>
-                                                    <div class="col-6 text-center encoded-54434312975-range mt-3">
-                                                        <div>از</div>
-                                                        <div id="encoded-54434312975-range-from">10000</div>
-                                                        <div>تومان</div>
-                                                    </div>
-                                                    <div class="col-6 text-center encoded-54434312975-range mt-3">
-                                                        <div>از</div>
-                                                        <div id="encoded-54434312975-range-to">500000</div>
-                                                        <div>تومان</div>
-                                                    </div>
-                                                    <div class="col-12 text-center py-2">
-                                                        <div class="btn btn-warning">اعمال محدوده قیمت</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div class="accordion filters-container mt-3">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapseTwo">
+                                                    محدوده قیمت
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="row">
+                                                        <div class="col-6 text-center encoded-54434312975-range mt-3">
+                                                            <div>از</div>
+                                                            <input type="number" id="encoded-54434312975-range-to" name="min_price" value="" class="form-control"/>
 
-                                <div class="accordion filters-container mt-3">
-                                    <div class="accordion-item">
-                                        <div id="collapseThree" class="accordion-collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body pb-2">
-                                                <div class="form-group">
-                                                    <input type="checkbox" id="only-available" name="available">
-                                                    <label for="only-available">فقط کالاهای موجود</label>
+                                                            <div>تومان</div>
+                                                        </div>
+                                                        <div class="col-6 text-center encoded-54434312975-range mt-3">
+                                                            <div>تا</div>
+                                                            <input type="number" id="encoded-54434312975-range-to" name="max_price" class="form-control" value=""/>
+                                                            <div>تومان</div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <!-- /Side Panel -->
+
+
+                                    <div class="accordion filters-container mt-3">
+                                        <div class="accordion-item">
+                                            <div id="collapseThree" class="accordion-collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body pb-2">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" id="only-available" name="available" value="1">
+                                                        <label for="only-available">فقط کالاهای موجود</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-center py-2">
+                                                <button type="submit" class="btn btn-warning">اعمال فیلتر </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </form>
+                                <!-- /Side Panel -->
                             </div>
+                            {{--                            <div class="col-12 col-lg-12 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">--}}
                             <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
                                 <!-- Filters -->
                                 <div id="order-filters">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 col-sm-10 my-1">
-                                                <span class="d-block d-sm-inline-block">مرتب سازی بر اساس:</span>
-                                                <span class="order-filter d-block d-sm-inline-block active">جدیدترین</span>
-                                                <span class="order-filter d-block d-sm-inline-block">پربازدیدترین</span>
-                                                <span class="order-filter d-block d-sm-inline-block">پرفروش‌ترین</span>
-                                                <span class="order-filter d-block d-sm-inline-block">ارزان‌ترین</span>
+                                                {{--                                                <span class="d-block d-sm-inline-block">مرتب سازی بر اساس:</span>--}}
+                                                {{--                                                <span class="order-filter d-block d-sm-inline-block active">جدیدترین</span>--}}
+                                                {{--                                                <span class="order-filter d-block d-sm-inline-block">پربازدیدترین</span>--}}
+                                                {{--                                                <span class="order-filter d-block d-sm-inline-block">پرفروش‌ترین</span>--}}
+                                                {{--                                                <span class="order-filter d-block d-sm-inline-block">ارزان‌ترین</span>--}}
                                             </div>
                                             <div class="col-12 col-sm-2 pt-1 text-end">
                                                 {{--                                            <span>--}}

@@ -76,7 +76,8 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        return User::create([
+
+        $user= User::create([
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
             'mobile' => $request->get('mobile'),
@@ -84,6 +85,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->get('password')),
             'ip' => $request->ip(),
         ]);
+
+        $user->giveRolesTo('customer');
+
+        return  $user;
     }
 
     public function showRegistrationForm()

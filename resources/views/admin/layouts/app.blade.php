@@ -15,11 +15,12 @@
     <link rel="stylesheet"
           href="{{asset('admin/assets/vendor_components/bootstrap/dist/css/bootstrap.css')}}">
 
+
     <!-- daterange picker -->
     <link rel="stylesheet"
           href="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 
-    <!-- Data Table-->
+{{--    <!-- Data Table-->--}}
     <link rel="stylesheet" type="text/css"
           href="{{asset('admin/assets/vendor_components/datatable/datatables.min.css')}}">
 
@@ -37,15 +38,15 @@
     <!-- theme style -->
     <link rel="stylesheet" href="{{asset('admin/css/master_style.css')}}">
 
-    @yield('links')
+@yield('links')
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <!--[if lt IE 9]>-->
+   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+{{--    <![endif]-->--}}
 
 
 </head>
@@ -55,27 +56,27 @@
 <div class="wrapper">
 
     <div class="art-bg">
-{{--        <img src="http://crmx-admin-template.multipurposethemes.com/images/art1.svg" alt="" class="art-img light-img">--}}
-{{--        <img src="http://crmx-admin-template.multipurposethemes.com/images/art2.svg" alt="" class="art-img dark-img">--}}
+        {{--        <img src="http://crmx-admin-template.multipurposethemes.com/images/art1.svg" alt="" class="art-img light-img">--}}
+        {{--        <img src="http://crmx-admin-template.multipurposethemes.com/images/art2.svg" alt="" class="art-img dark-img">--}}
     </div>
 
     <header class="main-header">
         <div class="inside-header">
 
             <!-- Logo -->
-{{--            <a href="index-2.html" class="logo">--}}
-                <!-- mini logo -->
-{{--                <div class="logo-mini">--}}
-{{--                    <span class="light-logo"><img src="../admin/images/logo-light.png" alt="logo"></span>--}}
-{{--                    <span class="dark-logo"><img src="../admin/images/logo-dark.png" alt="logo"></span>--}}
-{{--                </div>--}}
-                <!-- logo-->
-{{--                <div class="logo-lg">--}}
-{{--                    <span class="light-logo"><img src="../admin/images/logo-light-text.png" alt="logo"></span>--}}
-{{--                    <span class="dark-logo"><img src="../admin/images/logo-dark-text.png" alt="logo"></span>--}}
-{{--                </div>--}}
-{{--            </a>--}}
-            <!-- Header Navbar -->
+        {{--            <a href="index-2.html" class="logo">--}}
+        <!-- mini logo -->
+        {{--                <div class="logo-mini">--}}
+        {{--                    <span class="light-logo"><img src="../admin/images/logo-light.png" alt="logo"></span>--}}
+        {{--                    <span class="dark-logo"><img src="../admin/images/logo-dark.png" alt="logo"></span>--}}
+        {{--                </div>--}}
+        <!-- logo-->
+        {{--                <div class="logo-lg">--}}
+        {{--                    <span class="light-logo"><img src="../admin/images/logo-light-text.png" alt="logo"></span>--}}
+        {{--                    <span class="dark-logo"><img src="../admin/images/logo-dark-text.png" alt="logo"></span>--}}
+        {{--                </div>--}}
+        {{--            </a>--}}
+{{--        <!-- Header Navbar -->--}}
             <nav class="navbar navbar-static-top">
                 <div>
                     <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);">
@@ -85,7 +86,8 @@
                         <div class="input-group">
                             <input type="text" name="example-input1-group2" class="form-control" placeholder="جستجو">
                             <span class="input-group-btn">
-					<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true"><i class="mdi mdi-magnify"></i></button>
+					<button type="button" class="btn  btn-default" data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true"><i
+                            class="mdi mdi-magnify"></i></button>
 					</span>
                         </div>
                     </form>
@@ -153,7 +155,7 @@
                                         </h4>
                                     </div>
                                 </li>
-                                <!-- Menu Body -->
+{{--                                <!-- Menu Body -->--}}
                                 <li class="user-body">
                                     <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> پروفایل من</a>
                                     <div class="dropdown-divider"></div>
@@ -173,20 +175,45 @@
 
     <nav class="main-nav" role="navigation">
 
-        <!-- Mobile menu toggle button (hamburger/x icon) -->
+{{--        <!-- Mobile menu toggle button (hamburger/x icon) -->--}}
         <input id="main-menu-state" type="checkbox">
         <label class="main-menu-btn" for="main-menu-state">
             <span class="main-menu-btn-icon"></span> تعویض دید منوی اصلی
         </label>
 
-        <!-- Sample menu definition -->
+{{--        <!-- Sample menu definition -->--}}
         <ul id="main-menu" class="sm sm-rtl sm-blue">
 
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" ><i class="ti-dashboard mx-5"></i> داشبورد فروشگاهی</a></li>
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.categories.index' ) class="current" @endif href="{{route('admin.categories.index')}}" ><i class="ti-files mx-5"></i></i> دسته بندی کالا</a></li>
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.products.index') class="current" @endif href="{{route('admin.products.index')}}" ><i class="ti-files mx-5"></i></i> محصولات</a></li>
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.order.index") @endif href="{{route('admin.order.index')}}" ><i class="ti-layout-grid2 mx-5"></i> سفارشات</a></li>
-            <li><a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" ><i class="ti-pencil-alt mx-5"></i> مشتریان</a></li>
+            {{--            <li>--}}
+            {{--                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "") @endif href="index-3.html" >--}}
+            {{--                    <i class="ti-dashboard mx-5"></i> داشبورد--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.categories.index' ) class="current" @endif href="{{route('admin.categories.index')}}">
+                    <i class="ti-files mx-5"></i></i> دسته بندی کالا
+                </a>
+            </li>
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'admin.products.index') class="current" @endif href="{{route('admin.products.index')}}">
+                    <i class="ti-files mx-5"></i></i> محصولات
+                </a>
+            </li>
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.order.index") @endif href="{{route('admin.order.index')}}">
+                    <i class="ti-layout-grid2 mx-5"></i> سفارشات
+                </a>
+            </li>
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.users.index") @endif href="{{route('admin.users.index')}}">
+                    <i class="ti-pencil-alt mx-5"></i> کاربران
+                </a>
+            </li>
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.roles.index") @endif href="{{route('admin.roles.index')}}">
+                    <i class="ti-pencil-alt mx-5"></i> مدیریت نقشها
+                </a>
+            </li>
 
         </ul>
     </nav>
@@ -196,22 +223,21 @@
         <div class="container-full">
             <!-- Main content -->
 
-                   @yield('content')
+        @yield('content')
 
-            <!-- /.content -->
+        <!-- /.content -->
         </div>
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right d-none d-sm-inline-block">
         </div>
-پایین صفحه
+        پایین صفحه
     </footer>
 
 
 </div>
 <!-- ./wrapper -->
-
 
 
 <!-- jQuery 3 -->

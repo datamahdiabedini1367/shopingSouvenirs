@@ -196,7 +196,7 @@
         <div class="container">
             <div class="row">
                 <!-- Address Record -->
-                @foreach($addresses as $address)
+                @forelse($addresses as $address)
                     <div class="col-12 address py-2">
                         <div class="row">
                             <div class="col-12 col-sm-10">
@@ -236,7 +236,11 @@
                             </div>
                         </div>
                     </div>
-            @endforeach
+            @empty
+                    <p>
+                        هیچ آدرسی ثبت نشده است
+                    </p>
+            @endforelse
             <!-- Address Record -->
             </div>
         </div>

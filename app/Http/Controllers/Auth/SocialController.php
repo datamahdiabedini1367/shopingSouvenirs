@@ -33,7 +33,7 @@ class SocialController extends Controller
 
         if (!is_null($providerUser)) return $providerUser;
 
-        return User::query()->create([
+        $user =  User::query()->create([
             'email'=>$user->getEmail(),
             'firstname'=>$user->user['given_name'],
             'lastname'=>$user->user['family_name'],
@@ -41,8 +41,11 @@ class SocialController extends Controller
             'provider_id'=>$user->getId(),
             'avatar'=>$user->getAvatar(),
             'email_verified_at'=>now(),
-
         ]);
+
+        $user->giveRolesTo('customer');
+
+        return $user;
 
 
     }

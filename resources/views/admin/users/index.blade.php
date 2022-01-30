@@ -1,10 +1,17 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.app')
+@section('title','لیست کاربران')
+
+@section('links')
+
+@endsection
+
 
 
 @section('content')
 
     <div class="row">
         <div class="col-sm-12">
+            @include('partials.alerts')
             <div class="box">
                 <div class="box-header with-border">
                     <h1 class="box-title">
@@ -30,32 +37,30 @@
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->role->title}}</td>
                                         <td>
-                                            <a href="{{route('users.edit', $user)}}" class="btn btn-sm btn-primary">ویرایش</a>
+                                            @foreach($user->roles as $role)
+                                                <span class="badge badge-secondary" >{{$role->persian_name}}</span>
+                                            @endforeach
                                         </td>
                                         <td>
-                                            <form action="{{route('users.destroy', $user)}}" method="post">
+                                            <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{route('admin.users.destroy', $user)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="submit" class="btn btn-sm btn-danger" value="حذف">
                                             </form>
                                         </td>
                                     </tr>
+
                                 @endforeach
 
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>نام</th>
-                                <th>ایمیل</th>
-                                <th>نقش</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
+                @include('partials.validation-errors')
             </div>
         </div>
     </div>
@@ -63,11 +68,7 @@
 @endsection
 
 
+
 @section('scripts')
-    <script src="/admin/assets/vendor_components/datatable/datatables.min.js"></script>
-
-    <!-- Superieur Admin for Data Table -->
-    <script src="/admin/js/pages/data-table.js"></script>
-
-
+    <script src="{{asset('admin/js/pages/data-table.js')}}"></script>
 @endsection

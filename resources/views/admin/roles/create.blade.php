@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 
+@section('title' ,'ایجاد نقش جدید')
 
 @section('content')
 

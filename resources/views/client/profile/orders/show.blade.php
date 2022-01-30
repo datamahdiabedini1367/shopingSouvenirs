@@ -9,7 +9,7 @@
 
 
     <!-- Factors List -->
-    @foreach($orders as $order)
+    @forelse($orders as $order)
 
         <div class="custom-container  order mb-2" id="order-panel">
             <div class="row pt-2 px-3">
@@ -93,7 +93,8 @@
                                             </div>
                                         </div>
                                         <hr>
-                                @endforeach
+
+@endforeach
                                 <!-- /Order Record -->
                                 </div>
                             </div>
@@ -102,7 +103,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <p>هیچ سفارشی ثبت نشده است</p>
+    @endforelse
 
     <!-- /Factors List -->
 @endsection

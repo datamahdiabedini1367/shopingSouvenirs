@@ -6,6 +6,8 @@ use App\Jobs\SendEmail;
 use App\Mail\ResetPassword;
 use App\Mail\VerificationEmail;
 use App\Services\Auth\Traits\MagicallyAuthenticable;
+use App\Services\Permission\Traits\HasPermissions;
+use App\Services\Permission\Traits\HasRoles;
 use App\Support\Discount\Coupon\Traits\Couponable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,6 +18,8 @@ class User extends Authenticatable
 {
     use
 //        HasApiTokens,
+    HasPermissions,
+        HasRoles,
         Couponable,
         HasFactory,
         Notifiable,

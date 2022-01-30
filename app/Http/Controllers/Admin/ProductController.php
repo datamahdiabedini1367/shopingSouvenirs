@@ -54,6 +54,11 @@ class ProductController extends Controller
             'slug' => Str::random(6),
         ]);
 
+        $this->structure($request->get('category_id') , $product);
+
+
+
+
         if ($request->get('percent') !== 0) {
             $coupon = $product->coupons()->create([
                 'code' => $product->slug,
@@ -74,6 +79,22 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+
+    public function structure($category_id,$product)
+    {
+        $category = Category::query()->where('id',$category_id)->first();
+        $category_item = [];
+        while(!is_null($category->category_id)){
+            $category_item[]=$category->id;
+
+            $category = Category::query()->where('id',$category->category_id)->first();
+        }
+        $category_item[]=$category->id;
+
+
+
+        $product->categories()->sync($category_item);
     }
 
     /**
@@ -99,6 +120,9 @@ class ProductController extends Controller
             "description" => $request->get('description', $product->description),
             'category_id' => $request->get('category_id', $product->category_id),
         ]);
+
+        $this->structure($request->get('category_id') , $product);
+
 
         if ($request->get('percent') !== 0 && $product->validCoupon()->count()<1) {
 

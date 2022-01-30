@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title' ,'لیست سفارشات ')
+@section('title' ,'نمایش جزییات سفارش')
 
 @section('links')
 

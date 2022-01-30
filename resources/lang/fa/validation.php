@@ -61,6 +61,7 @@ return [
         'postal_code' =>'کد پستی',
         'receiver' =>'تحویل گیرنده',
         'phone_number' =>'شماره تماس',
+        'name_role' =>'نام نقش',
 
     ],
 

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Filters\ProductFilters;
 use App\Support\Discount\Coupon\Traits\Couponable;
 use App\Support\Discount\DiscountCalculator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Product extends Model
 {
@@ -95,7 +98,7 @@ class Product extends Model
 
     public function getRelatedProductAttribute($id)
     {
-        return $this->category->products()->where('id' ,'!=' ,$id)->get();
+        return $this->category->products()->where('id' ,'!=' ,$id)->get() ;
 
     }
 
@@ -104,18 +107,27 @@ class Product extends Model
         return number_format($this->price);
     }
 
-//    public function getQuantityAttribute()
-//    {
-//        dd(session()->all());
-//    }
 
-//    public function getTotalPriceAttribute()
-//    {
-//        return ($this->getPriceWithDiscountAttribute() * $this->orders()->quantity);
-//    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'product_category');
+}
 
 
+    public function scopeFilters(Builder $builder,Request $request)
+    {
+        $builder = (new ProductFilters())->apply($builder , $request);
 
+
+//        dd('scopeFilters',$builder->get());
+
+        return $builder;
+    }
+
+    public function latestCategory()
+    {
+        return $this->hasOne(Category::class)->latestOfMany();
+    }
 
 
 

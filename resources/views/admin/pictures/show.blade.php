@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 
-
+@section('title' , 'مدیریت تصاویر محصولات')
 
 
 @section('links')

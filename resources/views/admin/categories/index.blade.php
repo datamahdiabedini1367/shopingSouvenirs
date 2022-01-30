@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title' ,'لیست محصولات')
+@section('title' ,'لیست دسته بندی ها')
 
 @section('links')
 @endsection
@@ -71,7 +71,7 @@
 
                                         <a href="{{route('admin.category.subCategory.create' ,$category->slug)}}" class="text-info " data-toggle="tooltip"
                                            data-original-title="افزودن زیر دسته">
-                                            افرودن زیر دسته
+                                            <i class="ti-anchor"></i>
                                         </a>
                                     </td>
                                 </tr>
