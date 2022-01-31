@@ -1,14 +1,14 @@
 @component('mail::message')
-# Verify your email
+# تایید ایمیل
 
-Dear {{$name}}
+ {{$name}} عزیز
 
-The body of your message.
+برای تایید ایمیل خود بر روی دکمه زیر کلیک کن.
 
 @component('mail::button', ['url' => $link])
-verify your email
+تایید ایمیل
 @endcomponent
 
-Thanks,<br>
+با تشکر<br>
 {{ config('app.name') }}
 @endcomponent

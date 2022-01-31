@@ -14,7 +14,7 @@
         <div class="custom-container  order mb-2" id="order-panel">
             <div class="row pt-2 px-3">
                 <div class="col-12 col-sm-6"><h2>سفارش شماره {{$order->id}}</h2></div>
-                <div class="col-12 col-sm-6 text-sm-end"><span>{{$order->created_at}}</span> - <span>پرداخت شده</span></div>
+                <div class="col-12 col-sm-6 text-sm-end"><span>{{$order->created_at}}</span> - <span>{{$order->status_format}}</span></div>
             </div>
             <hr>
             <div class="container">

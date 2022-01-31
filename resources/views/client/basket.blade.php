@@ -119,17 +119,18 @@
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <div class="row product">
-                                                            <div class="col-12">
-                                                                <a href="{{route('basket.clear')}}" class="product-remove btn-remove-from-basket" data-id="all">
-                                                                    <div class="float-end small pl-2 font-weight-bold">خالی کردن سبد</div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+
                                                     @endforeach
                                                 @else
                                                     <div class="d-none d-md-block text-center">سبد خرید شما خالی می باشد.</div>
                                             @endif
+                                                <div class="row product">
+                                                    <div class="col-12">
+                                                        <a href="{{route('basket.clear')}}" class="product-remove btn-remove-from-basket" data-id="all">
+                                                            <div class="float-end small pl-2 font-weight-bold">خالی کردن سبد</div>
+                                                        </a>
+                                                    </div>
+                                                </div>
 
                                             <!-- Order Product Record -->
 

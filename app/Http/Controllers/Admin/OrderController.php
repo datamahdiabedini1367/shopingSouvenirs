@@ -48,6 +48,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        if ($order->status !== Order::CANCEL_ORDER){
+        $order->update([
+            'status'=>Order::PROCESSING,
+        ]);
+        }
         return view('admin.orders.show', compact('order'));
     }
 
@@ -85,5 +90,20 @@ class OrderController extends Controller
         $order->delete();
         $order->payment()->delete();
         return redirect()->back()->with('success', 'سفارش با موفقیت حذف شد');
+    }
+
+    public function cancel(Order $order)
+    {
+            $order->update([
+                'status' => Order::CANCEL_ORDER
+            ]);
+            return back()->with('error', 'سفارش کنسل شد');
+    }
+
+    public function orderRegisterd()
+    {
+        $orders = Order::query()->where('status',Order::REGISTERED)->get();
+        return $orders;
+
     }
 }

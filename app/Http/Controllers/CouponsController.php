@@ -61,4 +61,9 @@ class CouponsController extends Controller
         session()->forget('coupon');
         return back();
     }
+
+    public function create()
+    {
+        return view('');
+    }
 }

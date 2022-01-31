@@ -1,11 +1,13 @@
 @component('mail::message')
-# Login with magic Link
+# ورود با رمز یکبار مصرف
+
+برای ورود به سایت لطفا بر روی دکمه زیر کلیک کنید
 
 
 @component('mail::button', ['url' => $link])
-    Login
+    ورود
 @endcomponent
 
-Thanks,<br>
+با تشکر<br>
 {{ config('app.name') }}
 @endcomponent

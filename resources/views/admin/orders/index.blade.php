@@ -26,7 +26,8 @@
                                     <th>مبلغ فاکتور</th>
                                     <th>تاریخ</th>
                                     <th>نوع پرداخت</th>
-                                    <th>وضعیت پرداخت</th>
+                                    <th>وضعیت</th>
+                                    <th>وضعیت سفارش</th>
                                     <th>اقدامات</th>
                                 </tr>
                                 </thead>
@@ -40,6 +41,7 @@
                                             <td>{{number_format($order->amount)}} تومان</td>
                                             <td>{{$order->created_at}}</td>
                                             <td>{{$order->payment_method}}</td>
+                                            <td>{{$order->status_format}}</td>
                                             <td>
                                                 <span class="badge badge-pill {{$order->payment->status? 'badge-success':'badge-warning'}} ">{{$order->payment_status}}</span>
                                             </td>
@@ -50,6 +52,11 @@
                                                 <a href="{{route('admin.order.show',$order->id)}}" class="text-success mr-10" data-toggle="tooltip"
                                                    data-original-title="جزییات سفارش">
                                                     <i class="ti-receipt"></i>
+                                                </a>
+
+                                                <a href="{{route('admin.order.cancel',$order->id)}}" class="text-success mr-10" data-toggle="tooltip"
+                                                   data-original-title="لغو سفارش">
+                                                    <i class="ti-na"></i>
                                                 </a>
 
 

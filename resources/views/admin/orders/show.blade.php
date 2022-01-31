@@ -41,7 +41,6 @@
 
             <!-- Main content -->
             <section class="invoice printableArea">
-
                 <!-- title row -->
                 <div class="row rtl">
                     <div class="col-12">

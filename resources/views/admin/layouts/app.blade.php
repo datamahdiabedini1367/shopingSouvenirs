@@ -20,7 +20,7 @@
     <link rel="stylesheet"
           href="{{asset('admin/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 
-{{--    <!-- Data Table-->--}}
+    {{--    <!-- Data Table-->--}}
     <link rel="stylesheet" type="text/css"
           href="{{asset('admin/assets/vendor_components/datatable/datatables.min.css')}}">
 
@@ -38,20 +38,21 @@
     <!-- theme style -->
     <link rel="stylesheet" href="{{asset('admin/css/master_style.css')}}">
 
-@yield('links')
+    @yield('links')
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>-->
-   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-{{--    <![endif]-->--}}
+    {{--    <![endif]-->--}}
 
 
 </head>
 
 <body class="layout-top-nav light-skin theme-fruit rtl">
+@inject('order' , 'App\Http\Controllers\Admin\OrderController')
 
 <div class="wrapper">
 
@@ -71,12 +72,12 @@
         {{--                    <span class="dark-logo"><img src="../admin/images/logo-dark.png" alt="logo"></span>--}}
         {{--                </div>--}}
         <!-- logo-->
-        {{--                <div class="logo-lg">--}}
-        {{--                    <span class="light-logo"><img src="../admin/images/logo-light-text.png" alt="logo"></span>--}}
-        {{--                    <span class="dark-logo"><img src="../admin/images/logo-dark-text.png" alt="logo"></span>--}}
-        {{--                </div>--}}
-        {{--            </a>--}}
-{{--        <!-- Header Navbar -->--}}
+            {{--                <div class="logo-lg">--}}
+            {{--                    <span class="light-logo"><img src="../admin/images/logo-light-text.png" alt="logo"></span>--}}
+            {{--                    <span class="dark-logo"><img src="../admin/images/logo-dark-text.png" alt="logo"></span>--}}
+            {{--                </div>--}}
+            {{--            </a>--}}
+            {{--        <!-- Header Navbar -->--}}
             <nav class="navbar navbar-static-top">
                 <div>
                     <a id="toggle_res_search" data-toggle="collapse" data-target="#search_form" class="res-only-view" href="javascript:void(0);">
@@ -104,7 +105,8 @@
                         </li>
                         <!-- Messages -->
                         <!-- Notifications -->
-                        <li class="dropdown notifications-menu">
+                        @if($order->orderRegisterd()->count() >=1)
+                        <li class="dropdown  notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="سفارشات جدید">
                                 <i class="mdi mdi-bell"></i>
                             </a>
@@ -116,54 +118,53 @@
                                             <div>
                                                 <h4 class="mb-0 mt-0">سفارشات جدید</h4>
                                             </div>
-                                            <div>
-                                                <a href="#" class="text-danger">پاک کردن همه</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </li>
 
+
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu sm-scrol">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user text-success"></i> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
-                                            </a>
-                                        </li>
+                                        @foreach($order->orderRegisterd() as $order)
+                                            <li>
+                                                <a href="{{route('admin.order.show',$order->id)}}">
+                                                    سفارش {{$order->user->firstname .' '.$order->user->lastname}}  با شماره {{$order->id}}
+                                                </a>
+                                            </li>
+
+
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li class="footer">
-                                    <a href="#" class="bg-light">مشاهده همه</a>
+                                    <a href="{{route('admin.order.index')}}" class="bg-light ">مشاهده همه</a>
                                 </li>
                             </ul>
                         </li>
+                        @endif
 
                         <!-- User Account-->
-                        <li class="dropdown user user-menu">
+                        <li class="dropdown user user-menu ">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="کاربر">
-                                <img src="{{asset('admin/images/avatar/7.jpg')}}" class="user-image rounded-circle" alt="User Image">
+                                <img src="{{asset('admin/images/avatar/7.jpg')}}" class="user-image rounded-circle " alt="User Image">
                             </a>
-                            <ul class="dropdown-menu animated flipInX">
+                            <ul class="dropdown-menu animated flipInX ">
                                 <!-- User image -->
                                 <li class="user-header bg-img" style="background-image: url('{{asset('admin/images/user-info.jpg')}}')" data-overlay="3">
                                     <div class="flexbox align-self-center">
-                                        <img src="{{asset('admin/images/avatar/7.jpg')}}" class="float-left rounded-circle" alt="User Image">
-                                        <h4 class="user-name align-self-center">
-                                            <span>آرش خادملو</span>
-                                            <small>samuel@gmail.com</small>
+{{--                                        <img src="{{asset('admin/images/avatar/7.jpg')}}" class="float-left rounded-circle" alt="User Image">--}}
+                                        <h4 class="user-name align-self-center rtl">
+                                            <span>{{auth()->user()->firstname}}</span><br>
+                                            <span>{{auth()->user()->lastname}}</span>
+                                            <small>{{auth()->user()->email}}</small>
                                         </h4>
                                     </div>
                                 </li>
-{{--                                <!-- Menu Body -->--}}
                                 <li class="user-body">
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> پروفایل من</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> تنظیمات حساب</a>
+                                    <a class="dropdown-item" href="{{route('admin.profile.show')}}"><i class="ion ion-person"></i> پروفایل من</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('auth.logout')}}"><i class="ion-log-out"></i> خروج</a>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">مشاهده پروفایل</a></div>
                                 </li>
                             </ul>
                         </li>
@@ -175,13 +176,13 @@
 
     <nav class="main-nav" role="navigation">
 
-{{--        <!-- Mobile menu toggle button (hamburger/x icon) -->--}}
+        {{--        <!-- Mobile menu toggle button (hamburger/x icon) -->--}}
         <input id="main-menu-state" type="checkbox">
         <label class="main-menu-btn" for="main-menu-state">
             <span class="main-menu-btn-icon"></span> تعویض دید منوی اصلی
         </label>
 
-{{--        <!-- Sample menu definition -->--}}
+        {{--        <!-- Sample menu definition -->--}}
         <ul id="main-menu" class="sm sm-rtl sm-blue">
 
             {{--            <li>--}}
@@ -209,11 +210,11 @@
                     <i class="ti-pencil-alt mx-5"></i> کاربران
                 </a>
             </li>
-            <li>
-                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.roles.index") @endif href="{{route('admin.roles.index')}}">
-                    <i class="ti-pencil-alt mx-5"></i> مدیریت نقشها
-                </a>
-            </li>
+            {{--            <li>--}}
+            {{--                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.roles.index") @endif href="{{route('admin.roles.index')}}">--}}
+            {{--                    <i class="ti-pencil-alt mx-5"></i> مدیریت نقشها--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
             <li>
                 <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "contact.index") @endif href="{{route('contact.index')}}">
                     <i class="ti-pencil-alt mx-5"></i> مشاهده نظرات

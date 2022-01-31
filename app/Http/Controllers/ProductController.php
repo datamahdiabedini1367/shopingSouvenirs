@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validateFrom($request);
-        dd($request->all());
+//        dd($request->all());
     }
 
     private function validateFrom(Request $request)

@@ -23,6 +23,7 @@
 @section('content')
 
 
+
     <section class="inner-page" id="product-page">
         <div class="container-fluid" id="page-hero">
             <div class="row">
@@ -114,9 +115,10 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-7 mt-5 mt-lg-0 pl-lg-0" id="product-intro">
-                                <a href="product.html">
+                                <a href="#">
                                     <h1>{{$product->name}}</h1>
                                 </a>
+
 
                                 <div class="encoded-54434312975-container py-2">
                                     @if($product->validCoupon->count()>=1)
@@ -137,6 +139,8 @@
 
                                 <form action="{{route('basket.add' , $product->id)}}" method="post" class="form-inline">
                                     @csrf
+                                    @if($product->stock)
+
                                     <div class="variables">
                                         <div class="title">گزینه های موجود:</div>
                                         <div class="row">
@@ -158,10 +162,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="cta-container pt-3 pt-md-5">
                                         <div class="row">
                                             <div class="col-12">
+                                                @if($product->stock)
+
                                                 <button type="submit" class="btn btn-success px-4 px-lg-2 px-xl-4 btn-add-to-basket"><i class="fa fa-shopping-cart"></i>@lang('payment.add to basket')</button>
+                                                @else
+                                                    <span class="btn btn-warning px-4 px-lg-2 px-xl-4 btn-add-to-basket"> ناموجود</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

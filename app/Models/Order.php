@@ -82,8 +82,13 @@ class Order extends Model
     {
         $verta= new  Verta($value);
         return $verta->formatJalaliDate();
-
-
     }
+
+    public function getStatusFormatAttribute()
+    {
+        return $this->toString($this->status);
+    }
+
+
 
 }

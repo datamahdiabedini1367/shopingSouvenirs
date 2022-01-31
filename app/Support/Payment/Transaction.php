@@ -34,7 +34,7 @@ class Transaction
             'user_id' => auth()->user()->id,
             'code' => bin2hex(Str::random(16)),
             'amount' => $this->basket->subTotal(),
-            'status' => Order::REGISTERING,
+            'status' => Order::REGISTERED,
         ]);
 
         $order->products()->attach($this->products());
@@ -69,6 +69,8 @@ class Transaction
 
         return resolve($gateway);
     }
+
+
 
     public function checkout()
     {
@@ -127,7 +129,6 @@ class Transaction
     private function confirmPayment($result)
     {
         $result['order']->payment->confirm($result['RefNum'], $result['gateway']);
-        $result['order']->changeStatus();
     }
 
     private function normalizeQuantity($order)

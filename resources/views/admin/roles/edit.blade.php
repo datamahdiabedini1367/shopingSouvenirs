@@ -21,20 +21,20 @@
                         </div>
 
 
-                        <div class="form-group">
-                            <label> انتخاب دسترسی ها</label>
-                            <div class="row">
-                                @foreach($permissions as $permission)
-                                    <label for="{{'permission'.$permission->id}}" class="col-sm-2">
-                                        <input type="checkbox" name="permissions[]" value="{{$permission->name}}" id="{{'permission'.$permission->id}}"
-                                               @if($role->hasPermission($permission)) checked="checked" @endif
-                                               style="opacity: 1 !important;position: static !important; left: 0;right: 0;padding: 2px;margin: 3px;"
-                                        >{{$permission->persian_name}}
-                                    </label>
-                                @endforeach
-                            </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label> انتخاب دسترسی ها</label>--}}
+{{--                            <div class="row">--}}
+{{--                                @foreach($permissions as $permission)--}}
+{{--                                    <label for="{{'permission'.$permission->id}}" class="col-sm-2">--}}
+{{--                                        <input type="checkbox" name="permissions[]" value="{{$permission->name}}" id="{{'permission'.$permission->id}}"--}}
+{{--                                               @if($role->hasPermission($permission)) checked="checked" @endif--}}
+{{--                                               style="opacity: 1 !important;position: static !important; left: 0;right: 0;padding: 2px;margin: 3px;"--}}
+{{--                                        >{{$permission->persian_name}}--}}
+{{--                                    </label>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
 
-                        </div>
+{{--                        </div>--}}
 
 
                         <div class="form-group">

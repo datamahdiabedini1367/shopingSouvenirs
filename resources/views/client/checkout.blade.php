@@ -143,20 +143,6 @@
                                                                                         </p>
 
                                                                                     </li>
-                                                                                    <li class="list-group-item">
-                                                                                        <div class="custom-control custom-radio">
-                                                                                            <input type="radio" id="cart" value="cart" name="method" class="custom-control-input">
-                                                                                            <label class="custom-control-label" for="cart">
-                                                                                                کارت به کارت
-                                                                                            </label>
-                                                                                        </div>
-
-                                                                                        <p class='text-muted small'>
-                                                                                            لطفا مبلغ را به شماره کارت ۵۵۵۵−۵۵۵۵−۵۵۵۵−۵۵۵۵ واریز نمایدد و کد پیگیری را به همکاران ما
-                                                                                            اطلاع دهید
-                                                                                        </p>
-
-                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>

@@ -1,5 +1,5 @@
 @component('mail::message')
-# Forget Password
+#
 
 The body of your message.
 

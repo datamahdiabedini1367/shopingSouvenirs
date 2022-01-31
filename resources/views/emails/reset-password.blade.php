@@ -1,12 +1,17 @@
+
 @component('mail::message')
-# Forget Password
+# بازیابی رمز عبور
 
-The body of your message.
-
+این ایمیل به درخواست شما و به منظور بازیابی رمز عبور برای شما ارسال شده است .
+##### درصورتی که شما این درخواست را نداده اید .این ایمیل را نادیده بگیرید.
+برای بازیابی رمز عبور بر روی دکمه زیر کلیک کنید.
 @component('mail::button', ['url' => $link])
-Reset your Password
+بازیابی رمز عبور
 @endcomponent
 
-Thanks,<br>
+با تشکر از شما
 {{ config('app.name') }}
 @endcomponent
+
+
+

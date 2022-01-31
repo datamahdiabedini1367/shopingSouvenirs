@@ -16,7 +16,7 @@ class CategoryProductController extends Controller
     public function index(Category $category)
     {
         $products = $category->products()->get();
-        dd($products);
+//        dd($products);
     }
 
     /**

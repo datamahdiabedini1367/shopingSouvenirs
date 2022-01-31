@@ -140,6 +140,11 @@ Route::prefix('/panel')->name('admin.')->middleware('role:admin')->group(functio
         'order' => OrderController::class,
     ]);
 
+    Route::get('profile/show',[UserController::class,'show'])->name('profile.show');
+    Route::post('profile/{user}/update',[UserController::class,'update_profile'])->name('user.update.profile');
+
+    Route::get('/order/{order}/cancel',[OrderController::class,'cancel'])->name('order.cancel');
+
     Route::get('/product/{product:slug}/pictures', [PictureProductController::class, 'show'])->name('product.pictures.show');
     Route::post('/product/{product:slug}/pictures', [PictureProductController::class, 'store'])->name('product.pictures.store');
     Route::delete('/picture/{picture}', [PictureProductController::class, 'destroy'])->name('product.pictures.destroy');
@@ -164,22 +169,6 @@ Route::prefix('/panel')->name('admin.')->middleware('role:admin')->group(functio
 
 
     Route::get('dashboard' , [DashboardController::class,'index'])->name('dashboard');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     Route::get("/", function () {
         return view('admin.layouts.app');
