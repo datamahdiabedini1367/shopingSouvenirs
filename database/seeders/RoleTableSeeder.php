@@ -16,6 +16,8 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+//        Role::query()->truncate();
+
         $role = Role::query()->insert([
             ['name'=>'admin','persian_name'=>'مدیر سایت'],
             ['name'=>'customer','persian_name'=>'مشتری'],

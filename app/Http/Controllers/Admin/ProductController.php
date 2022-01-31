@@ -121,7 +121,7 @@ class ProductController extends Controller
             'category_id' => $request->get('category_id', $product->category_id),
         ]);
 
-        $this->structure($request->get('category_id') , $product);
+//        $this->structure($request->get('category_id') , $product);
 
 
         if ($request->get('percent') !== 0 && $product->validCoupon()->count()<1) {

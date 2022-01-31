@@ -47,7 +47,7 @@
                     <div class="col-12">
                         <div class="bb-1 clearFix">
                             <div class="text-right pb-15">
-                                <button class="btn btn-rounded btn-success" type="button"> <span><i class="fa fa-print"></i> ذخیره</span> </button>
+{{--                                <button class="btn btn-rounded btn-success" type="button"> <span><i class="fa fa-print"></i> ذخیره</span> </button>--}}
                                 <button id="print2" class="btn btn-rounded btn-warning" type="button"> <span><i class="fa fa-print"></i> چاپ</span> </button>
                             </div>
                         </div>
@@ -56,7 +56,8 @@
                         <div class="page-header">
                             <h2 class="d-inline"><span class="font-size-30">صورتحساب  {{$order->user->firstname.' '.$order->user->lastname}}</span></h2>
                             <div class="pull-right text-right">
-                                <h3>{{$order->created_at}}</h3>
+
+                                <h3>تاریخ ثبت :{{$order->created_at}}</h3>
                             </div>
                         </div>
                     </div>
@@ -121,17 +122,6 @@
                 <div class="row">
                     <div class="col-12 text-right">
                         <p class="lead"><b>نوع پرداخت:</b><span class="text-danger"> {{$order->payment_method}} </span></p>
-                        <p class="lead"><b>نوع پرداخت</b><span class="text-danger"> 14/08/2018 </span></p>
-
-                        <div>
-                            <p>زیر - مجموع مقدار  :  3,592.00 تومان</p>
-                            <p>مالیات (18%)  :  646.56 تومان</p>
-                            <p>حمل و نقل  :  110.44 تومان</p>
-                        </div>
-                        <div class="total-payment">
-                            <h3><b>مجموع :</b> 4,349.00 تومان</h3>
-                        </div>
-
                     </div>
                     <!-- /.col -->
                 </div>

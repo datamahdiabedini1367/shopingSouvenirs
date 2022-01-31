@@ -52,7 +52,7 @@
                                                 @foreach($categories as $category)
                                                     <div class="form-group">
                                                         <input type="checkbox" id="category{{$category->id}}" name="category[]" value="{{$category->id}}">
-                                                        <label for="category1">{{$category->name}}</label>
+                                                        <label for="category{{$category->id}}">{{$category->name}}</label>
                                                     </div>
                                                 @endforeach
 
@@ -114,6 +114,7 @@
                                 <!-- /Side Panel -->
                             </div>
                             {{--                            <div class="col-12 col-lg-12 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">--}}
+                            @if($products->count()>0)
                             <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
                                 <!-- Filters -->
                                 <div id="order-filters">
@@ -169,10 +170,14 @@
                                                             </div>
 
                                                             <div>
-                                                                <a class="btn btn-success" href="{{route('client.product.show_detail' , $product->slug)}}">
+                                                                @if($product->stock>0)
+                                                                <a class="btn btn-success w-100" href="{{route('client.product.show_detail' , $product->slug)}}">
                                                                     <i class="fa fa-shopping-cart"></i>
                                                                     مشاهده و خرید
                                                                 </a>
+                                                                @else
+                                                                    <span class="btn bg-warning w-100">ناموجود</span>
+                                                                @endif
 
                                                             </div>
                                                         </div>
@@ -194,6 +199,12 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                                <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                                    هیچ کالایی یافت نشد
+                                </div>
+
+                                @endif
                         </div>
                     </div>
                 </div>

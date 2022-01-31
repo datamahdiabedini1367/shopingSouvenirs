@@ -161,7 +161,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> تنظیمات حساب</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i> خروج</a>
+                                    <a class="dropdown-item" href="{{route('auth.logout')}}"><i class="ion-log-out"></i> خروج</a>
                                     <div class="dropdown-divider"></div>
                                     <div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">مشاهده پروفایل</a></div>
                                 </li>
@@ -212,6 +212,11 @@
             <li>
                 <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "admin.roles.index") @endif href="{{route('admin.roles.index')}}">
                     <i class="ti-pencil-alt mx-5"></i> مدیریت نقشها
+                </a>
+            </li>
+            <li>
+                <a @if(\Illuminate\Support\Facades\Route::currentRouteName() == "contact.index") @endif href="{{route('contact.index')}}">
+                    <i class="ti-pencil-alt mx-5"></i> مشاهده نظرات
                 </a>
             </li>
 

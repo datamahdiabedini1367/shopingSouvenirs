@@ -41,7 +41,7 @@
                     <li><a href="contact.html">پیگیری سفارش</a></li>
                     <li><a href="faq.html">سوالات متداول</a></li>
                     <li><a href="about.html">درباره ما</a></li>
-                    <li><a href="contact.html">تماس با ما</a></li>
+                    <li><a href="{{route('contactus')}}">تماس با ما</a></li>
                 </ul>
             </div>
             <div class="col-6 col-sm-4 col-lg-2">

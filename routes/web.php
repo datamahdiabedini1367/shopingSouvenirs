@@ -17,9 +17,11 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\Client\AddressController;
 use App\Http\Controllers\Client\CategoryProductController;
+use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\CouponsController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +49,13 @@ use Illuminate\Support\Facades\Route;
 Route::get("/adminpanel/products/list", function () {
     return view('admin.products.list');
 });
+
+Route::get('about',[IndexController::class,'about'])->name('about');
+Route::get('contactus',[IndexController::class,'contactus'])->name('contactus');
+
+Route::post('contact/store',[ContactController::class,'store'])->name('contact.store');
+Route::get('contact/index',[ContactController::class,'index'])->name('contact.index');
+Route::delete('contact/{contact}/delete',[ContactController::class,'destroy'])->name('contact.destroy');
 
 
 Route::post('basket/add/{product}', [BasketController::class, 'add'])->name('basket.add');

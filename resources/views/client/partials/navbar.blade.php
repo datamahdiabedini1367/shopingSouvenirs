@@ -132,8 +132,8 @@
                                             </li>
 
 
-                                            <li><a href="about.html">درباره ما<em class="droopmenu-topanim"></em></a></li>
-                                            <li><a href="about.html">تماس با ما<em class="droopmenu-topanim"></em></a></li>
+                                            <li><a href="{{route('about')}}">درباره ما<em class="droopmenu-topanim"></em></a></li>
+                                            <li><a href="{{route('contactus')}}">تماس با ما<em class="droopmenu-topanim"></em></a></li>
 
                                             @auth
                                                 <li class="encoded-54566542" aria-haspopup="true">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -76,6 +77,13 @@ class Order extends Model
             return "آنلاین";
         elseif ($this->payment->method ==='cash')
             return "نقدی";
+    }
+    public function getCreatedAtAttribute($value)
+    {
+        $verta= new  Verta($value);
+        return $verta->formatJalaliDate();
+
+
     }
 
 }

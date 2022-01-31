@@ -14,6 +14,8 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
+//        Permission::query()->truncate();
+
         Permission::query()->insert([
             ['name'=>'view_orders','persian_name'=>'نمایش سفارشات'],
             ['name'=>'cancel_order','persian_name'=>'لغو سفارشات'],
