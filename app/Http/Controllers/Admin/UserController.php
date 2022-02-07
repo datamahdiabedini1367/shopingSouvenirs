@@ -8,6 +8,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -121,7 +122,7 @@ class UserController extends Controller
             'firstname' => $request->get('firstname', $user->firstname),
             'lastname' => $request->get('lastname', $user->lastname),
             'email' => $request->get('email', $user->email),
-            'password' => $request->get('password', $user->password),
+            'password' => Hash::make($request->get('password', $user->password)),
             'mobile' => $request->get('mobile', $user->mobile),
         ]);
 

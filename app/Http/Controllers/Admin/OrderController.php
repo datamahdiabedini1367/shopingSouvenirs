@@ -102,7 +102,7 @@ class OrderController extends Controller
 
     public function orderRegisterd()
     {
-        $orders = Order::query()->where('status',Order::REGISTERED)->get();
+        $orders = Order::query()->where('status',Order::REGISTERED)->with('products')->get();
         return $orders;
 
     }

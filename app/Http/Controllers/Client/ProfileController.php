@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -66,8 +67,9 @@ class ProfileController extends Controller
 
     public function showOrdersForm()
     {
+//        Order::query()->orderBy('created_at')->get();
         return view('client.profile.orders.show',[
-            'orders'=>$this->getUser()->orders
+            'orders'=>$this->getUser()->orders()->with('products')->orderBy('created_at','desc')->get()
         ]);
     }
 
